@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMove : MonoBehaviour
+public class SummonMinion : MonoBehaviour
 {
-    public GameObject target;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +15,4 @@ public class NPCMove : MonoBehaviour
     {
         
     }
-
-
 }
