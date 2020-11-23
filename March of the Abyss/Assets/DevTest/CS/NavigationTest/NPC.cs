@@ -128,18 +128,30 @@ public class NPC : MonoBehaviour
 
     #region Health
 
-    private float maxHealth;
-    private float currentHealth;
+    protected float maxHealth;
+    protected float currentHealth;
 
 
-    public virtual void CheckHealth()
+    protected virtual void CheckHealth()
     {
-
+        if(currentHealth <= 0)
+        {
+            DoKill();
+        }
     }
 
-    public virtual void DoKill()
+    protected virtual void DoKill()
     {
+        //Insert death anim
+        //Insert death effect
+        //Insert GM souls increase
+        Destroy(gameObject);
+    }
 
+    protected void DamageRecieved(float value)
+    {
+        //Insert if for collision
+        currentHealth -= value;
     }
 
     #endregion
