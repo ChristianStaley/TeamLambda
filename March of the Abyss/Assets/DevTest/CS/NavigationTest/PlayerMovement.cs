@@ -9,12 +9,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     public GameObject mousePos;
 
+    Animator animator;
+
     NavMeshAgent agent;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
     }
 
     void Update()
@@ -26,8 +30,9 @@ public class PlayerMovement : MonoBehaviour
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
                 agent.destination = hit.point;
-                agent.transform.LookAt(hit.point);
             }
         }
+
+        animator.SetFloat("Speed", agent.desiredVelocity.magnitude);
     }
 }
