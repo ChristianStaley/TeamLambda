@@ -16,4 +16,5 @@ public class NPCNeutral : NPC
         base.Update();
     }
 
+
 }
