@@ -54,6 +54,7 @@ public class NPCHealth : MonoBehaviour
     // Damage Receiver
     public void Damage(float _fl_damage)
     {   // Subtract the damage sent from HP
+        Debug.Log("Collision Detected");
         fl_HP -= _fl_damage;
     }//-----
 }
