@@ -128,7 +128,24 @@ public class GM : MonoBehaviour
 
     #endregion
 
+    #region Health
 
+    int currentHealth = 0;
+    static public int Health
+    {
+        get
+        {
+            return mSingleton.currentHealth;
+        }
+        set
+        {
+            Debug.Assert(value > 0, "Adding negative health error");
+            mSingleton.currentHealth += value;
+        }
+
+    }
+
+    #endregion
 
     #region GameStates
 
