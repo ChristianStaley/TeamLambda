@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
-    public GameObject target;
+    [SerializeField]
+    protected GameObject target;
     public float maxDistance;
     public float minDistance;
+
+    [SerializeField]
+    protected GameObject deadBody;
 
     public enum NPCState 
     {
@@ -36,11 +41,17 @@ public class NPC : MonoBehaviour
         agent.speed = moveSpeed;
         agent.angularSpeed = 250;
         agent.acceleration = 100;
+        if(target == null)
+        {
+            target = GameObject.Find("Player");
+        }
+        lastWait = Time.deltaTime;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        CheckHealth();
         TargetDistance();
 
         switch (currentState)
@@ -62,6 +73,7 @@ public class NPC : MonoBehaviour
             case NPCState.ATTACK:
                 {
                     AttackTarget();
+                    MoveToPoint();
                     return;
                 }
         }
@@ -77,13 +89,20 @@ public class NPC : MonoBehaviour
         }
         else if (currentDistance < minDistance)
         {
+            transform.LookAt(target.transform.position);
             currentState = NPCState.IDLE;
         }
         else if (foundTarget)
         {
             StartSearch();
         }
-        
+
+        if(Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        {
+            currentState = NPCState.ATTACK;
+        }
+
+
     }
 
 
@@ -111,11 +130,24 @@ public class NPC : MonoBehaviour
 
     private float attackSpeed;
     private float attackDamage;
+    [SerializeField]
+    private float attackRange;
+    private float attackCooldown = 3f;
+    private float lastWait;
+    public GameObject projectile;
     private Transform attackTarget;
 
     public virtual void AttackTarget()
     {
+        if (Vector3.Distance(target.transform.position, transform.position) <= attackRange && Time.time > lastWait)
+        {
+            transform.LookAt(target.transform.position);
+            Instantiate(projectile, new Vector3(transform.position.x + 2, transform.position.y + 1, transform.position.z), transform.rotation);
+            lastWait = Time.time + attackCooldown;
 
+        }
+        Debug.Log("Attack Now");
+        
     }
 
     public virtual void UpdateTarget()
@@ -131,8 +163,8 @@ public class NPC : MonoBehaviour
 
     #region Health
 
-    protected float maxHealth;
-    protected float currentHealth;
+    protected float maxHealth = 100;
+    protected float currentHealth = 100;
 
 
     protected virtual void CheckHealth()
@@ -148,12 +180,15 @@ public class NPC : MonoBehaviour
         //Insert death anim
         //Insert death effect
         GM.Souls = soulDropAmount;
-        Destroy(gameObject);
+        Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        //PrefabUtility.InstantiatePrefab(deadBody);      
+        Destroy(this.gameObject, 1f);
+        this.enabled = false;
     }
 
     public void Damage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth = damage;
     }
 
     #endregion

@@ -27,4 +27,9 @@ public class NPCHostile : NPC
         else
             agent.isStopped = false;
     }
+
+    public void Damage(int damage)
+    {
+        currentHealth = damage;
+    }
 }

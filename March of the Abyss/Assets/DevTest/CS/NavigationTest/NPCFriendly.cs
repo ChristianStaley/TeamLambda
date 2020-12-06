@@ -29,5 +29,15 @@ public class NPCFriendly : NPC
         {
             agent.isStopped = false;
         }
+
+    }
+
+    protected override void DoKill()
+    {
+        //Insert death anim
+        //Insert death effect
+        GM.Souls = soulDropAmount;
+        Destroy(this.gameObject, 1f);
+        this.enabled = false;
     }
 }

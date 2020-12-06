@@ -84,8 +84,15 @@ public class GM : MonoBehaviour
         }
         set
         {
-            Debug.Assert(value > 0, "Adding negative score error");
-            mSingleton.currentSouls += value;
+            if(value < 0)
+            {
+                mSingleton.currentSouls -= value;
+            }
+            else
+            {
+                mSingleton.currentSouls += value;
+            }
+            
         }
 
     }
@@ -139,8 +146,15 @@ public class GM : MonoBehaviour
         }
         set
         {
-            Debug.Log("Health Remove" + value);
-            mSingleton.currentHealth += value;
+            if (value <= 0)
+            {
+                mSingleton.currentHealth += value;
+            }
+            else
+            {
+                mSingleton.currentHealth += value;
+            }
+            
 
         }
 
