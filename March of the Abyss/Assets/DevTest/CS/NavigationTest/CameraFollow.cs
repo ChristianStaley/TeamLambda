@@ -5,9 +5,18 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject followTarget;
-    //public GameObject player;
 
-    private Vector3 cameraRotation;
+    [Range(0.1f, 0.9f)]
+    public float smoothSpeed;
+    public Vector3 offset;
+
+
+    public bool allowRotation;
+
+    Vector3 velocity = Vector3.zero;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +27,16 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = followTarget.transform.position + new Vector3(0, 8, -10);
+        Vector3 cameraPosition = followTarget.transform.position + offset;
+        transform.position = Vector3.SmoothDamp(transform.position, cameraPosition, ref velocity, smoothSpeed);
+
+        if (allowRotation)
+        {
+            transform.LookAt(followTarget.transform);
+        }
+        
     }
+
 
 
     public void UpdateTarget(GameObject target)
