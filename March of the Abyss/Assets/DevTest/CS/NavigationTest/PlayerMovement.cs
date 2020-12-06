@@ -5,13 +5,14 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed;
+    //Private
     private Rigidbody rb;
-    public GameObject mousePos;
-
     Animator animator;
-
     NavMeshAgent agent;
+
+    //Public
+    public float moveSpeed;
+    public GameObject mousePos;
 
     void Start()
     {
@@ -22,6 +23,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
+    {
+
+        if (GM.Health > 0)
+        {
+            SetMovePosition();
+        }
+        else
+        {
+            agent.isStopped = true;
+        }
+
+
+
+    }
+
+    private void SetMovePosition()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -35,4 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Speed", agent.desiredVelocity.magnitude);
     }
+
+
+
 }

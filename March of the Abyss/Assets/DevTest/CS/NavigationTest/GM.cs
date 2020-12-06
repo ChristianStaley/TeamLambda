@@ -76,7 +76,7 @@ public class GM : MonoBehaviour
     #region Souls
 
     int currentSouls = 0;
-    static public int Score
+    static public int Souls
     {
         get
         {
@@ -130,7 +130,7 @@ public class GM : MonoBehaviour
 
     #region Health
 
-    int currentHealth = 0;
+    int currentHealth = 100;
     static public int Health
     {
         get
@@ -139,8 +139,9 @@ public class GM : MonoBehaviour
         }
         set
         {
-            Debug.Assert(value > 0, "Adding negative health error");
+            Debug.Log("Health Remove" + value);
             mSingleton.currentHealth += value;
+
         }
 
     }

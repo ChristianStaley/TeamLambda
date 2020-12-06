@@ -18,6 +18,9 @@ public class NPC : MonoBehaviour
 
     public NPCState currentState = NPCState.IDLE;
 
+    [SerializeField]
+    protected int soulDropAmount;
+
     public float searchTime;
     protected NavMeshAgent agent;
     private Rigidbody rb;
@@ -144,14 +147,13 @@ public class NPC : MonoBehaviour
     {
         //Insert death anim
         //Insert death effect
-        //Insert GM souls increase
+        GM.Souls = soulDropAmount;
         Destroy(gameObject);
     }
 
-    protected void DamageRecieved(float value)
+    public void Damage(int damage)
     {
-        //Insert if for collision
-        currentHealth -= value;
+        currentHealth -= damage;
     }
 
     #endregion
@@ -162,6 +164,8 @@ public class NPC : MonoBehaviour
         
         foundTarget = false;
     }
+
+
 
 
 }
