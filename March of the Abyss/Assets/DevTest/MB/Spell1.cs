@@ -20,8 +20,11 @@ public class Spell1 : MonoBehaviour
         {
             ps_attached.Play();
             //ps_attached.enableEmission = true;
+           
         }
-        else {
+
+        else
+        {
             ps_attached.Stop();
             //ps_attached.enableEmission = false;
         }
