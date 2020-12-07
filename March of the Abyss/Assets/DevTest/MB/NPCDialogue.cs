@@ -20,8 +20,8 @@ public class NPCDialogue : MonoBehaviour
     void Start()
     {
         go_PC = GameObject.FindWithTag("Player");
-        go_panel = GameObject.Find("GM").transform.Find("MessagePanel").gameObject;
-        txt_window = go_panel.transform.Find("MessageText").GetComponent<Text>();
+        go_panel = GameObject.Find("GM").transform.Find("DialoguePanel").gameObject;
+        txt_window = go_panel.transform.Find("DialogueText").GetComponent<Text>();
         //txt_NPC= go_panel.transform.Find("MessageText").GetComponent<Text>();
 
     }//-----
