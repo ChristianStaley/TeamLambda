@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        other.collider.gameObject.SendMessage("Damage", -fl_damage, SendMessageOptions.DontRequireReceiver);
+        other.collider.gameObject.SendMessage("Damage", fl_damage, SendMessageOptions.DontRequireReceiver);
         Destroy(this.gameObject);
     }
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,8 +7,14 @@ public class NPC : MonoBehaviour
 {
     [SerializeField]
     protected GameObject target;
+    protected GameObject player;
     public float maxDistance;
     public float minDistance;
+
+    
+
+    [SerializeField]
+    protected bool ignorePlayer = false;
 
     [SerializeField]
     protected GameObject deadBody;
@@ -30,7 +35,7 @@ public class NPC : MonoBehaviour
     protected NavMeshAgent agent;
     private Rigidbody rb;
     private bool foundTarget = false;
-
+    protected GameObject[] tE;
     protected float currentDistance;
 
     // Start is called before the first frame update
@@ -41,24 +46,30 @@ public class NPC : MonoBehaviour
         agent.speed = moveSpeed;
         agent.angularSpeed = 250;
         agent.acceleration = 100;
-        if(target == null)
+        if (player == null)
         {
-            target = GameObject.Find("Player");
+            player = GameObject.Find("Player");
         }
+        //if(target == null)
+        //{
+        //    target = player;
+        //}
         lastWait = Time.deltaTime;
+        
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         CheckHealth();
+        if(!ignorePlayer)
         TargetDistance();
 
         switch (currentState)
         {
             case NPCState.IDLE:
                 {
-
+                    StartSearch();
                     return;
                 }
                                     
@@ -66,6 +77,7 @@ public class NPC : MonoBehaviour
             case NPCState.MOVING:
                 {
                     MoveToPoint();
+                    
                     return;
                 }
 
@@ -73,34 +85,48 @@ public class NPC : MonoBehaviour
             case NPCState.ATTACK:
                 {
                     AttackTarget();
-                    MoveToPoint();
                     return;
                 }
         }
 
+        
     }
 
     protected virtual void TargetDistance()
     {
-        currentDistance = Vector3.Distance(transform.position, target.transform.position);
-        if (currentDistance <= maxDistance && currentDistance >= minDistance)
+        if (target != null)
         {
-            currentState = NPCState.MOVING;
+            currentDistance = Vector3.Distance(transform.position, target.transform.position);
+            if (currentDistance <= maxDistance && currentDistance > attackRange) //&& currentDistance <= minDistance)
+            {
+                currentState = NPCState.MOVING;
+            }
+            else if(currentDistance > maxDistance)
+            {
+                currentState = NPCState.IDLE;
+            }
+            else if (currentDistance <= attackRange)
+            {
+                transform.LookAt(target.transform.position);
+                currentState = NPCState.ATTACK;
+            }
+
         }
-        else if (currentDistance < minDistance)
-        {
-            transform.LookAt(target.transform.position);
-            currentState = NPCState.IDLE;
-        }
-        else if (foundTarget)
+        else
         {
             StartSearch();
         }
 
-        if(Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        if (currentDistance <= minDistance)
         {
-            currentState = NPCState.ATTACK;
+            agent.isStopped = true;
         }
+        else
+        {
+            agent.isStopped = false;
+        }
+
+
 
 
     }
@@ -113,14 +139,11 @@ public class NPC : MonoBehaviour
 
     public virtual void MoveToPoint()
     {
-           
+        if(target != null)
+        {
             agent.destination = target.transform.position;
-            foundTarget = true;
-    }
-
-    public virtual void SearchForTarget()
-    {
-
+        }
+        
     }
 
     #endregion
@@ -128,34 +151,51 @@ public class NPC : MonoBehaviour
 
     #region Attack
 
-    private float attackSpeed;
-    private float attackDamage;
+    protected float attackSpeed;
+    protected float attackDamage;
     [SerializeField]
-    private float attackRange;
-    private float attackCooldown = 3f;
+    protected float attackRange;
+    protected float attackCooldown = 3f;
+    [SerializeField]
+    protected LayerMask targetMask;
     private float lastWait;
     public GameObject projectile;
     private Transform attackTarget;
 
-    public virtual void AttackTarget()
+    protected virtual void AttackTarget()
     {
-        if (Vector3.Distance(target.transform.position, transform.position) <= attackRange && Time.time > lastWait)
+        if (target != null)
         {
-            transform.LookAt(target.transform.position);
-            Instantiate(projectile, new Vector3(transform.position.x + 2, transform.position.y + 1, transform.position.z), transform.rotation);
-            lastWait = Time.time + attackCooldown;
+            if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+            {
 
+                if (Time.time > lastWait)
+                {
+                    transform.LookAt(target.transform.position);
+
+                    GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                    Physics.IgnoreCollision(GetComponent<Collider>(), tempProjectile.GetComponent<Collider>());
+                    lastWait = Time.time + attackCooldown;
+
+                    Debug.Log("Attack Now");
+
+                }
+
+            }
+            else if (Vector3.Distance(target.transform.position, transform.position) >= attackRange + 1)
+            {
+                target = null;
+                StartSearch();
+            }
         }
-        Debug.Log("Attack Now");
+        else
+        {
+            StartSearch();
+        }
+        
+        
         
     }
-
-    public virtual void UpdateTarget()
-    {
-
-
-    }
-
 
 
     #endregion
@@ -180,27 +220,40 @@ public class NPC : MonoBehaviour
         //Insert death anim
         //Insert death effect
         GM.Souls = soulDropAmount;
-        Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        //PrefabUtility.InstantiatePrefab(deadBody);      
+        Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);      
         Destroy(this.gameObject, 1f);
         this.enabled = false;
     }
 
-    public void Damage(int damage)
-    {
-        currentHealth = damage;
-    }
+
 
     #endregion
+    float rayHitDist;
 
-
-    void StartSearch()
+    protected virtual void StartSearch()
     {
-        
-        foundTarget = false;
+
+        RaycastHit hit;
+        if(Physics.SphereCast(transform.position, attackRange, transform.forward, out hit, targetMask))
+        {
+            rayHitDist = hit.distance;
+            if(hit.transform.gameObject.layer == 9 || hit.transform.gameObject.layer == 13)
+            {
+                target = hit.transform.gameObject;
+                currentState = NPCState.ATTACK;
+                Debug.Log("MINION FOUND");
+            }
+        }
+        if(Physics.SphereCast(transform.position, attackRange/2, -transform.forward, out hit, targetMask))
+        {
+            rayHitDist = hit.distance;
+            if (hit.transform.gameObject.layer == 9 || hit.transform.gameObject.layer == 13)
+            {
+                target = hit.transform.gameObject;
+                currentState = NPCState.ATTACK;
+                Debug.Log("MINION FOUND");
+            }
+        }
     }
-
-
-
 
 }

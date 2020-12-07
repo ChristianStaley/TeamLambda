@@ -15,10 +15,10 @@ TagManager:
   - 
   - MiniMap
   - Player
-  - NPC
-  - Body
-  - 
-  - 
+  - Hostile
+  - Corpse
+  - Projectile
+  - Minion
   - 
   - 
   - 
