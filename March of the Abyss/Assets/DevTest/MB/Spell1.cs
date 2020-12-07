@@ -19,11 +19,11 @@ public class Spell1 : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             ps_attached.Play();
-            ps_attached.enableEmission = true;
+            //ps_attached.enableEmission = true;
         }
         else {
             ps_attached.Stop();
-            ps_attached.enableEmission = false;
+            //ps_attached.enableEmission = false;
         }
 
 
