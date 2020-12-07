@@ -124,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5946405522405195684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5818882, y: 4.09, z: -6.44}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5946405522016690666}
@@ -234,7 +234,7 @@ MonoBehaviour:
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
   currentState: 0
-  soulDropAmount: 100
+  soulDropAmount: 80
   searchTime: 100
   moveSpeed: 6
   attackRange: 5

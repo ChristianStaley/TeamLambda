@@ -13,18 +13,15 @@ public class SummonMinion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(player == null)
-        {
             player = GameObject.Find("Player");
-        }
-        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= detectDistance && Input.GetKeyDown(KeyCode.R))
+
+        if (Vector3.Distance(player.transform.position, transform.position) <= detectDistance && Input.GetKeyDown(KeyCode.R) && GM.Souls >=100)
         {
             GM.Souls = -100;
             GameObject.Instantiate(minion, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
