@@ -35,7 +35,6 @@ public class NPC : MonoBehaviour
     protected NavMeshAgent agent;
     private Rigidbody rb;
     private bool foundTarget = false;
-    protected GameObject[] tE;
     protected float currentDistance;
 
     // Start is called before the first frame update
@@ -225,6 +224,10 @@ public class NPC : MonoBehaviour
         this.enabled = false;
     }
 
+    protected virtual float GetHealth()
+    {
+        return currentHealth;
+    }
 
 
     #endregion
