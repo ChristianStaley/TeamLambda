@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Damage(int damage)
     {
-        GM.Health = damage;
+        GM.Health -= damage;
     }
 
 }
