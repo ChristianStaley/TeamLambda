@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3452857901103323419}
   - component: {fileID: 3452857901103323416}
   - component: {fileID: 3452857901103323417}
+  - component: {fileID: -7159060592313294444}
   m_Layer: 13
   m_Name: Minion 1
   m_TagString: Untagged
@@ -147,6 +148,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   projectile: {fileID: 5899589521235418336, guid: 1f8b6c774d23efb4c9e943e01eddd156, type: 3}
+  maxHealth: 25
+--- !u!114 &-7159060592313294444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452857901103323422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b1463ad57cead4d8a1c60b62c6a243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fl_HP: 25
+  fl_max_HP: 25
+  go_hit_text: {fileID: 7093640439071665794, guid: c868ba455919ba540aa2ba5aaf8fc990, type: 3}
 --- !u!1 &3452857902931341805
 GameObject:
   m_ObjectHideFlags: 0

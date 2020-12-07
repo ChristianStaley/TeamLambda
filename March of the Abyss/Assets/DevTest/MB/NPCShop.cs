@@ -55,7 +55,7 @@ public class NPCShop : MonoBehaviour
             GM.Souls >= fl_cost[0])
             {
                 go_objects_to_drop[0].SetActive(true);
-                GM.Souls -= fl_cost[0];
+                GM.Souls = -fl_cost[0];
                 bl_dispensed[0] = true;
             }
 
@@ -63,7 +63,7 @@ public class NPCShop : MonoBehaviour
                 if (!bl_dispensed[1] && GM.Souls >= fl_cost[1])
                 {
                     go_objects_to_drop[1].SetActive(true);
-                    GM.Souls -= fl_cost[1];
+                    GM.Souls = -fl_cost[1];
                     bl_dispensed[1] = true;
                 }
 
@@ -71,7 +71,7 @@ public class NPCShop : MonoBehaviour
                 if (!bl_dispensed[2] && GM.Souls >= fl_cost[2])
                 {
                     go_objects_to_drop[2].SetActive(true);
-                    GM.Souls -= fl_cost[2];
+                    GM.Souls = -fl_cost[2];
                     bl_dispensed[2] = true;
                 }
 
@@ -79,7 +79,7 @@ public class NPCShop : MonoBehaviour
                 if (!bl_dispensed[3] && GM.Souls >= fl_cost[3])
                 {
                     go_objects_to_drop[3].SetActive(true);
-                    GM.Souls -= fl_cost[3];
+                    GM.Souls = -fl_cost[3];
                     bl_dispensed[3] = true;
                 }
         }

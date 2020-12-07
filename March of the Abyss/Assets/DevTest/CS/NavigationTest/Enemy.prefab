@@ -317,7 +317,7 @@ MonoBehaviour:
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
   currentState: 0
-  soulDropAmount: 80
+  soulDropAmount: 75
   searchTime: 100
   moveSpeed: 6
   attackRange: 5
@@ -325,6 +325,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   projectile: {fileID: 5899589521235418336, guid: 1f8b6c774d23efb4c9e943e01eddd156, type: 3}
+  maxHealth: 75
 --- !u!114 &1432661669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b1463ad57cead4d8a1c60b62c6a243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fl_HP: 100
-  fl_max_HP: 100
+  fl_HP: 75
+  fl_max_HP: 75
   go_hit_text: {fileID: 7093640439071665794, guid: c868ba455919ba540aa2ba5aaf8fc990, type: 3}

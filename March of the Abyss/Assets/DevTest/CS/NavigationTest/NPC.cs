@@ -40,6 +40,7 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         agent.speed = moveSpeed;
@@ -202,8 +203,9 @@ public class NPC : MonoBehaviour
 
     #region Health
 
+    [SerializeField]
     protected float maxHealth = 100;
-    protected float currentHealth = 100;
+    protected float currentHealth;
 
 
     protected virtual void CheckHealth()

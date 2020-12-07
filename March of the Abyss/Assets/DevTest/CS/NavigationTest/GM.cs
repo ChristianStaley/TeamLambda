@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class GM : MonoBehaviour
 
     #region Souls
 
-    int currentSouls = 0;
+    int currentSouls = 150;
     static public int Souls
     {
         get
@@ -86,7 +87,7 @@ public class GM : MonoBehaviour
         {
             if(value < 0)
             {
-                mSingleton.currentSouls -= value;
+                mSingleton.currentSouls += value;
             }
             else
             {
@@ -377,7 +378,10 @@ public class GM : MonoBehaviour
 
         IncreaseLevel();
         CountTime();
-
+        if(currentHealth<= 0)
+        {
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     #endregion
