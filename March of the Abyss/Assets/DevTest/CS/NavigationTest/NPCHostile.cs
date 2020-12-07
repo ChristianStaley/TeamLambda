@@ -8,23 +8,36 @@ public class NPCHostile : NPC
     protected override void Start()
     {
         base.Start();
+        targetMask = LayerMask.GetMask("Minion", "Player");
+        Debug.Log("MINION SET AS MASK");
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+
     }
 
     protected override void TargetDistance()
     {
         base.TargetDistance();
-        if (currentDistance < minDistance)
+        //if (currentDistance < minDistance)
+        //{
+        //    agent.isStopped = true;
+        //    currentState = NPCState.ATTACK;
+        //}
+        //else
+        //    agent.isStopped = false;
+    }
+
+    public void Damage(int damage)
+    {
+        currentHealth -= damage;
+        currentState = NPCState.ATTACK;
+        if(target == null)
         {
-            agent.isStopped = true;
-            currentState = NPCState.ATTACK;
+            target = player;
         }
-        else
-            agent.isStopped = false;
     }
 }
