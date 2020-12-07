@@ -28,8 +28,7 @@ public class NPCHealth : MonoBehaviour
     // ----------------------------------------------------------------------
     void CheckHealth()
     {
-        if (fl_HP <= 0) // health depleted
-            Destroy(gameObject);
+        
     }//------ 
 
     // ----------------------------------------------------------------------
