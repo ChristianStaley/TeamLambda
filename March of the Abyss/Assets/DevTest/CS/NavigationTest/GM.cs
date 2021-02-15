@@ -39,7 +39,7 @@ public class GM : MonoBehaviour
 
     private void Start()
     {
-
+        Application.targetFrameRate = 60;
     }
 
 
@@ -102,16 +102,14 @@ public class GM : MonoBehaviour
 
     #region Spells
 
-    private string[] spellList = new string[2]
-    {
-        "Fireball", "AcidBomb"
-    };
+    public GameObject[] spellList;
+
 
 
 
 
     private int currentSpell = 0;
-    public static string spell
+    public static GameObject spell
     {
         get
         {
