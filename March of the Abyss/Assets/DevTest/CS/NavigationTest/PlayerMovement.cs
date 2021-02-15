@@ -13,7 +13,12 @@ public class PlayerMovement : MonoBehaviour
     //Public
     public float moveSpeed;
     public GameObject mousePos;
+    private bool previewEnabled = false;
 
+    private SpellAttack spellAttack = new SpellAttack();
+    private MeleeAttack meleeAttack = new MeleeAttack();
+
+    private GameObject tempPreview = null;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -34,7 +39,47 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
 
+            previewEnabled = true;
+        }
+
+
+        if (previewEnabled)
+        {
+            
+            
+            if (tempPreview == null)
+            {
+                tempPreview = Instantiate(GM.spell.GetComponent<Projectile>().preview);
+            }
+
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+            {
+                tempPreview.transform.position = Vector3.MoveTowards(tempPreview.transform.position, hit.point, 2f);
+            }
+
+            
+            if (Input.GetMouseButtonDown(1))
+            {
+                
+
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+                {
+
+                    gameObject.transform.LookAt(hit.point);
+                    agent.ResetPath();
+                    spellAttack.SpawnProjectile(gameObject, hit.point);
+                    Destroy(tempPreview);
+                    previewEnabled = false;
+
+                }
+
+            }
+        }
+        
 
     }
 

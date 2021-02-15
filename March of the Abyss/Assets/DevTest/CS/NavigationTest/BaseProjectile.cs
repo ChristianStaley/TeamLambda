@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class BaseProjectile : MonoBehaviour
 {
 
 
@@ -11,7 +11,9 @@ public class Projectile : MonoBehaviour
     public float fl_damage = 10;
     public bool bl_use_Trigger = true;
 
-    public GameObject preview;
+    
+
+
 
     void Start()
     {
@@ -20,7 +22,7 @@ public class Projectile : MonoBehaviour
 
         if (bl_use_Trigger)
             GetComponent<Collider>().isTrigger = true;
-    } 
+    }
 
     void OnCollisionEnter(Collision other)
     {
