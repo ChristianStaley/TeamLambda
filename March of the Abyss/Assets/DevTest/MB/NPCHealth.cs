@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NPCHealth : MonoBehaviour
 {
@@ -49,10 +50,15 @@ public class NPCHealth : MonoBehaviour
     {
         // Subtract the damage sent from HP
         fl_HP -= _fl_damage;
+        
         // Create text mesh to show hit damage
-        GameObject _GO_hit_text = Instantiate(go_hit_text, transform.position + Vector3.up, transform.rotation) as GameObject;
-        _GO_hit_text.GetComponent<TextMesh>().text = _fl_damage.ToString();
-        _GO_hit_text.GetComponent<TextMesh>().color = Color.red;
+        //GameObject _GO_hit_text = Instantiate(go_hit_text, transform.position + Vector3.up, transform.rotation) as GameObject;
+        GameObject _GO_hit_text = Instantiate(go_hit_text, transform.position, Quaternion.identity, transform) as GameObject;
+        Vector3 dmgPos = Camera.main.WorldToScreenPoint(transform.position);
+        go_hit_text.transform.position = dmgPos;
+
+        _GO_hit_text.GetComponent<TextMeshPro>().text = _fl_damage.ToString();
+        _GO_hit_text.GetComponent<TextMeshPro>().color = Color.red;
     }//-----
 
 }

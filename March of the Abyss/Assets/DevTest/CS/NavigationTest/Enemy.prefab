@@ -340,4 +340,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fl_HP: 75
   fl_max_HP: 75
-  go_hit_text: {fileID: 7093640439071665794, guid: c868ba455919ba540aa2ba5aaf8fc990, type: 3}
+  go_hit_text: {fileID: 3422733249172635069, guid: 0fab0d53687a2c5408bb56f36ddb8814, type: 3}
