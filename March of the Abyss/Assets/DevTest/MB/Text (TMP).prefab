@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8302405922599845501}
   - component: {fileID: 3178301282231868781}
   - component: {fileID: -5289214500443116372}
+  - component: {fileID: -3396618451214480653}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3422733249172635069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 16.032661}
+  m_LocalPosition: {x: 0, y: 0, z: 12.122902}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -35,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1120.2128, y: 539.991}
+  m_AnchoredPosition: {x: 589.25336, y: 368.58698}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8302405922599845501
@@ -182,5 +183,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0caabd5afac37a458df979c761f5a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   fl_life_time: 1
   fl_speed: 2
+--- !u!95 &-3396618451214480653
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422733249172635069}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ddeecd6ccb14f374da27695bea949031, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

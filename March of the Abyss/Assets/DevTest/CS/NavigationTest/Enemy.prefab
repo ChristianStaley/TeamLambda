@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 821849865}
   - component: {fileID: 821849868}
   - component: {fileID: 821849867}
+  - component: {fileID: 3529572590248748179}
   m_Layer: 0
   m_Name: HP_Bar
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3529572590248748179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821849864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff1f7bb07b38084abf301eede213f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1 &5946405522016690665
 GameObject:
   m_ObjectHideFlags: 0
