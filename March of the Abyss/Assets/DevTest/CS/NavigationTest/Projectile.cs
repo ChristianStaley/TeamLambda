@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public float fl_damage = 10;
     public bool bl_use_Trigger = true;
 
+    public GameObject preview;
 
     void Start()
     {
