@@ -11,16 +11,17 @@ public class NPCDialogue : MonoBehaviour
     private GameObject go_panel;
     private Text txt_window;
     private int in_message_stage = 0;
-    private Text txt_NPC;
+    //private Text txt_NPC;
     public string NPC_name;
+    
 
     // ----------------------------------------------------------------------
     // Use this for initialization
     void Start()
     {
         go_PC = GameObject.FindWithTag("Player");
-        go_panel = GameObject.Find("DialogueManager").transform.Find("MessagePanel").gameObject;
-        txt_window = go_panel.transform.Find("MessageText").GetComponent<Text>();
+        go_panel = GameObject.Find("GM").transform.Find("DialoguePanel").gameObject;
+        txt_window = go_panel.transform.Find("DialogueText").GetComponent<Text>();
         //txt_NPC= go_panel.transform.Find("MessageText").GetComponent<Text>();
 
     }//-----
@@ -34,15 +35,21 @@ public class NPCDialogue : MonoBehaviour
         {
             // Enable the message panel active
             if (!go_panel.activeInHierarchy) go_panel.SetActive(true);
-
             
+
+
             // Step through the messages if there are more than 1
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (st_message.Length > 1 && (in_message_stage < st_message.Length - 1))
                     in_message_stage++;
-            }
+                else
+                {
+                    go_panel.SetActive(false);
+                }
 
+            }
+            
             // update the text box
             txt_window.text = st_message[in_message_stage];
             //txt_NPC.text = NPC_name;
@@ -50,8 +57,10 @@ public class NPCDialogue : MonoBehaviour
         else if (go_PC && Vector3.Distance(go_PC.transform.position, transform.position) < fl_distance + 1)
         {
             go_panel.SetActive(false);
+            
         }
 
     }
+
    
     }//-----

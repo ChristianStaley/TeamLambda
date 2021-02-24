@@ -16,14 +16,17 @@ public class Spell1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.Q))
         {
             ps_attached.Play();
-            ps_attached.enableEmission = true;
+            //ps_attached.enableEmission = true;
+           
         }
-        else {
+
+        else
+        {
             ps_attached.Stop();
-            ps_attached.enableEmission = false;
+            //ps_attached.enableEmission = false;
         }
 
 

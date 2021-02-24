@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class GM : MonoBehaviour
 
     private void Start()
     {
-
+        Application.targetFrameRate = 60;
     }
 
 
@@ -75,8 +76,8 @@ public class GM : MonoBehaviour
 
     #region Souls
 
-    int currentSouls = 0;
-    static public int Score
+    int currentSouls = 150;
+    static public int Souls
     {
         get
         {
@@ -84,8 +85,15 @@ public class GM : MonoBehaviour
         }
         set
         {
-            Debug.Assert(value > 0, "Adding negative score error");
-            mSingleton.currentSouls += value;
+            if(value < 0)
+            {
+                mSingleton.currentSouls += value;
+            }
+            else
+            {
+                mSingleton.currentSouls += value;
+            }
+            
         }
 
     }
@@ -94,16 +102,14 @@ public class GM : MonoBehaviour
 
     #region Spells
 
-    private string[] spellList = new string[2]
-    {
-        "Fireball", "AcidBomb"
-    };
+    public GameObject[] spellList;
+
 
 
 
 
     private int currentSpell = 0;
-    public static string spell
+    public static GameObject spell
     {
         get
         {
@@ -130,7 +136,7 @@ public class GM : MonoBehaviour
 
     #region Health
 
-    int currentHealth = 0;
+    int currentHealth = 100;
     static public int Health
     {
         get
@@ -139,8 +145,16 @@ public class GM : MonoBehaviour
         }
         set
         {
-            Debug.Assert(value > 0, "Adding negative health error");
-            mSingleton.currentHealth += value;
+            if (value <= 0)
+            {
+                mSingleton.currentHealth += value;
+            }
+            else
+            {
+                mSingleton.currentHealth += value;
+            }
+            
+
         }
 
     }
@@ -362,7 +376,10 @@ public class GM : MonoBehaviour
 
         IncreaseLevel();
         CountTime();
-
+        if(currentHealth<= 0)
+        {
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     #endregion
