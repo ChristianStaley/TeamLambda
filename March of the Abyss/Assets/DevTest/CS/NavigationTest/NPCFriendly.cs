@@ -82,7 +82,6 @@ public class NPCFriendly : NPC
             {
                 target = hit.transform.gameObject;
                 currentState = NPCState.ATTACK;
-                Debug.Log("NPC FOUND");
             }
             else if (target == null)
             {
@@ -96,7 +95,6 @@ public class NPCFriendly : NPC
             {
                 target = hit.transform.gameObject;
                 currentState = NPCState.ATTACK;
-                Debug.Log("NPC FOUND");
             }
             else if (target == null)
             {

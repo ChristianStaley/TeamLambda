@@ -6,13 +6,14 @@ public class BaseProjectile : MonoBehaviour
 {
 
 
-    public float fl_range = 20;
-    public float fl_speed = 10;
-    public float fl_damage = 10;
-    public bool bl_use_Trigger = true;
+    protected float fl_range = 20;
+    protected float fl_speed = 10;
+    protected float fl_damage = 10;
+    protected bool bl_use_Trigger = true;
+    public float range = 20;
 
     
-
+    
 
 
     void Start()

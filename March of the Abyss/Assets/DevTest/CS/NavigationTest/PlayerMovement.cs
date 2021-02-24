@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private MeleeAttack meleeAttack = new MeleeAttack();
 
     private GameObject tempPreview = null;
+
+    private float previewCooldown = 0.2f;
+    private float lastCooldown;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -39,24 +42,27 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.S))
         {
 
             previewEnabled = true;
+            lastCooldown = Time.deltaTime;
+            
         }
 
 
         if (previewEnabled)
         {
-            
-            
-            if (tempPreview == null)
-            {
-                tempPreview = Instantiate(GM.spell.GetComponent<Projectile>().preview);
-            }
 
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+
+            if (tempPreview == null)
+            {
+                tempPreview = Instantiate(GM.spell.GetComponent<Projectile>().preview, gameObject.transform);
+            }
+
+            
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9) && Vector3.Distance(gameObject.transform.position, tempPreview.transform.position) <= GM.spell.GetComponent<Projectile>().range)
             {
                 tempPreview.transform.position = Vector3.MoveTowards(tempPreview.transform.position, hit.point, 2f);
             }
@@ -78,7 +84,18 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
+            Debug.Log("Last cooldown " + lastCooldown);
+            Debug.Log("Preview Cooldown " + previewCooldown);
+            Debug.Log("Current Time " + Time.deltaTime);
+            if (Time.deltaTime > lastCooldown + previewCooldown && Input.GetKeyDown(KeyCode.S))
+            {
+
+                previewEnabled = false;
+                Destroy(tempPreview);
+                
+            }
         }
+
         
 
     }
@@ -93,6 +110,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 
                 agent.destination = hit.point;
+            }
+            else if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+            {
+                //INSERT MELEE ATTACK CODE
             }
         }
 
