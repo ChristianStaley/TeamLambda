@@ -177,7 +177,6 @@ public class NPC : MonoBehaviour
                     Physics.IgnoreCollision(GetComponent<Collider>(), tempProjectile.GetComponent<Collider>());
                     lastWait = Time.time + attackCooldown;
 
-                    Debug.Log("Attack Now");
 
                 }
 
@@ -246,7 +245,6 @@ public class NPC : MonoBehaviour
             {
                 target = hit.transform.gameObject;
                 currentState = NPCState.ATTACK;
-                Debug.Log("MINION FOUND");
             }
         }
         if(Physics.SphereCast(transform.position, attackRange/2, -transform.forward, out hit, targetMask))
@@ -256,7 +254,6 @@ public class NPC : MonoBehaviour
             {
                 target = hit.transform.gameObject;
                 currentState = NPCState.ATTACK;
-                Debug.Log("MINION FOUND");
             }
         }
     }

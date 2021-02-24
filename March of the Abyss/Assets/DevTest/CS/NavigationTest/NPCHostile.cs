@@ -9,8 +9,6 @@ public class NPCHostile : NPC
     {
         base.Start();
         targetMask = LayerMask.GetMask("Minion", "Player");
-        Debug.Log("MINION SET AS MASK");
-
     }
 
     // Update is called once per frame
