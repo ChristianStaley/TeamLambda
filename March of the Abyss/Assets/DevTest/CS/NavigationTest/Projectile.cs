@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : BaseProjectile
 {
-
-
-    public float fl_range = 20;
-    public float fl_speed = 10;
-    public float fl_damage = 10;
-    public bool bl_use_Trigger = true;
 
     public GameObject preview;
 

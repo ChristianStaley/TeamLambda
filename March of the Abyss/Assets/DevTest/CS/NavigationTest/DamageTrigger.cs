@@ -23,7 +23,6 @@ public class DamageTrigger : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         collision.gameObject.SendMessage("Damage", -damage, SendMessageOptions.DontRequireReceiver);
-        Debug.Log("Message Sent");
     }
 
 }
