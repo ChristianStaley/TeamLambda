@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastCooldown;
 
     private GameObject target;
+    private bool performMeleeAttack = true;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -131,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Hostile"))
                 {
-                    Debug.Log("Enemy clicked");
+                    
                     target = hit.transform.gameObject;
                     FaceTarget(target);
                     agent.destination = hit.point;
@@ -140,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
                 
             }
 
-            Debug.Log("Right Click");
+         
         }
         
 
@@ -150,21 +151,58 @@ public class PlayerMovement : MonoBehaviour
 
             if(Vector3.Distance(transform.position, target.transform.position) <= 2)
             {
+                if (performMeleeAttack)
+                {
+                    StartCoroutine(MeleeAttackInterval());
+                }
+                    
+                
+                animator.SetBool("isAttack", true);
+
                 if (!Input.GetMouseButton(0))
                 {
                     agent.ResetPath();
+
                 }
                 else
                 {
                     target = null;
+                    animator.SetBool("isAttack", false);
                 }
+
                 
                 meleeAttack.Attack(colliderPlayer, gameObject);
             }
         }
+        else
+        {
+            animator.SetBool("isAttack", false);
+        }
 
         animator.SetFloat("Speed", agent.desiredVelocity.magnitude);
     }
+
+    IEnumerator MeleeAttackInterval()
+    {
+        animator.SetBool("isAttack", true);
+        performMeleeAttack = false;
+        
+        yield return new WaitForSeconds(1f);
+
+        if(target != null)
+        {
+            target.SendMessage("Damage", 20, SendMessageOptions.DontRequireReceiver);
+        }
+        
+        performMeleeAttack = true;
+        if (target == null)
+        {
+            animator.SetBool("isAttack", false);
+            performMeleeAttack = true;
+        }
+    }
+
+
 
     void FaceTarget(GameObject target)
     {

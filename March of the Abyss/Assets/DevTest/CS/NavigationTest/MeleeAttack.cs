@@ -33,13 +33,12 @@ public class MeleeAttack : MonoBehaviour
 
     IEnumerator StartAttack(Collider hitbox, GameObject actor)
     {
-        hitbox.enabled = true;
         Physics.IgnoreCollision(hitbox, actor.GetComponent<Collider>());
         
 
         yield return new WaitForSeconds(1);
 
-        hitbox.enabled = false;
+
         activeCooldown = false;
     }
 

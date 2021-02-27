@@ -885,6 +885,10 @@ PrefabInstance:
       propertyPath: minDistance
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5946405522405195681, guid: d3f37f582cfd6e1498f48bea21b5836c, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 962333099126769349, guid: f6682b328c5533f45b0a464ced53009b, type: 3}
     - target: {fileID: 5946405522405195684, guid: d3f37f582cfd6e1498f48bea21b5836c, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
@@ -1013,6 +1017,10 @@ PrefabInstance:
       propertyPath: ignorePlayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5946405522405195681, guid: d3f37f582cfd6e1498f48bea21b5836c, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 962333099126769349, guid: f6682b328c5533f45b0a464ced53009b, type: 3}
     - target: {fileID: 5946405522405195682, guid: d3f37f582cfd6e1498f48bea21b5836c, type: 3}
       propertyPath: m_StoppingDistance
       value: 1
@@ -1259,6 +1267,10 @@ PrefabInstance:
       propertyPath: minDistance
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3452857901103323417, guid: b7079516a9bfbf348901fe4c452123c9, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 962333099126769349, guid: f6682b328c5533f45b0a464ced53009b, type: 3}
     - target: {fileID: 3452857901103323422, guid: b7079516a9bfbf348901fe4c452123c9, type: 3}
       propertyPath: m_Name
       value: Minion
