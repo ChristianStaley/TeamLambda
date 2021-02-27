@@ -9,11 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     Animator animator;
     NavMeshAgent agent;
+    private bool previewEnabled = false;
 
     //Public
     public float moveSpeed;
     public GameObject mousePos;
-    private bool previewEnabled = false;
+    public Collider colliderPlayer;
 
     private SpellAttack spellAttack = new SpellAttack();
     private MeleeAttack meleeAttack = new MeleeAttack();
@@ -22,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float previewCooldown = 0.2f;
     private float lastCooldown;
+
+    private GameObject target;
+    private bool performMeleeAttack = true;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -84,9 +88,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
-            Debug.Log("Last cooldown " + lastCooldown);
-            Debug.Log("Preview Cooldown " + previewCooldown);
-            Debug.Log("Current Time " + Time.deltaTime);
+
             if (Time.deltaTime > lastCooldown + previewCooldown && Input.GetKeyDown(KeyCode.S))
             {
 
@@ -102,24 +104,111 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetMovePosition()
     {
+        RaycastHit hit;
+
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit hit;
+            
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
             {
                 
                 agent.destination = hit.point;
             }
-            else if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+            
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
             {
-                //INSERT MELEE ATTACK CODE
+
+                agent.destination = hit.point;
             }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            {
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Hostile"))
+                {
+                    
+                    target = hit.transform.gameObject;
+                    FaceTarget(target);
+                    agent.destination = hit.point;
+                    
+                }
+                
+            }
+
+         
+        }
+        
+
+        if(target != null)
+        {
+            FaceTarget(target);
+
+            if(Vector3.Distance(transform.position, target.transform.position) <= 2)
+            {
+                if (performMeleeAttack)
+                {
+                    StartCoroutine(MeleeAttackInterval());
+                }
+                    
+                
+                animator.SetBool("isAttack", true);
+
+                if (!Input.GetMouseButton(0))
+                {
+                    agent.ResetPath();
+
+                }
+                else
+                {
+                    target = null;
+                    animator.SetBool("isAttack", false);
+                }
+
+                
+                meleeAttack.Attack(colliderPlayer, gameObject);
+            }
+        }
+        else
+        {
+            animator.SetBool("isAttack", false);
         }
 
         animator.SetFloat("Speed", agent.desiredVelocity.magnitude);
     }
 
+    IEnumerator MeleeAttackInterval()
+    {
+        animator.SetBool("isAttack", true);
+        performMeleeAttack = false;
+        
+        yield return new WaitForSeconds(1f);
 
+        if(target != null)
+        {
+            target.SendMessage("Damage", 20, SendMessageOptions.DontRequireReceiver);
+        }
+        
+        performMeleeAttack = true;
+        if (target == null)
+        {
+            animator.SetBool("isAttack", false);
+            performMeleeAttack = true;
+        }
+    }
+
+
+
+    void FaceTarget(GameObject target)
+    {
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 
 }
