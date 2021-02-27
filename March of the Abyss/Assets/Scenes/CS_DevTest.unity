@@ -799,6 +799,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4528769517123467989, guid: 6aaeab8993e9f80498afb74c044c385b, type: 3}
+      propertyPath: colliderPlayer
+      value: 
+      objectReference: {fileID: 1029599262}
+    - target: {fileID: 4528769518473926554, guid: 6aaeab8993e9f80498afb74c044c385b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528769518473926629, guid: 6aaeab8993e9f80498afb74c044c385b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5073588766107302949, guid: 6aaeab8993e9f80498afb74c044c385b, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -809,6 +821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aaeab8993e9f80498afb74c044c385b, type: 3}
+--- !u!65 &1029599262 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5073588766446363975, guid: 6aaeab8993e9f80498afb74c044c385b, type: 3}
+  m_PrefabInstance: {fileID: 848787099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1364646038
 PrefabInstance:
   m_ObjectHideFlags: 0
