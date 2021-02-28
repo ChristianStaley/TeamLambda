@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+    public bool clickToLoad = false;
+    public string nextScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,10 @@ public class LoadScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(clickToLoad && Input.GetMouseButtonDown(0))
+        {
+            LoadLevel(nextScene);
+        }
     }
 
 
