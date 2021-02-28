@@ -9,7 +9,7 @@ public class BaseProjectile : MonoBehaviour
     protected float fl_range = 20;
     protected float fl_speed = 10;
     protected float fl_damage = 10;
-    protected bool bl_use_Trigger = true;
+    protected bool bl_use_Trigger = false;
     public float range = 20;
 
     

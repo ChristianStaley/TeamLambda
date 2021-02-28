@@ -6,6 +6,7 @@ public class Projectile : BaseProjectile
 {
 
     public GameObject preview;
+    private bool gravity;
 
     void Start()
     {
@@ -14,6 +15,11 @@ public class Projectile : BaseProjectile
 
         if (bl_use_Trigger)
             GetComponent<Collider>().isTrigger = true;
+
+        if (!gravity)
+        {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+        }
     } 
 
     void OnCollisionEnter(Collision other)
