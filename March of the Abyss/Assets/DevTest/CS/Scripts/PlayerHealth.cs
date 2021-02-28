@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
         transform.position = GM.SpawnLocation;
         pmPlayer.enabled = true;
         animPlayer.SetInteger("Die", 0);
+        GM.Health = 100;
 
     }
 

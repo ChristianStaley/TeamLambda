@@ -151,8 +151,8 @@ public class GM : MonoBehaviour
 
     #region Health
 
-    public int currentHealth = 100;
-    static public int Health
+    public float currentHealth = 100;
+    static public float Health
     {
         get
         {
@@ -173,6 +173,25 @@ public class GM : MonoBehaviour
         }
 
     }
+
+    #endregion
+
+    #region Gold
+
+    private int currentGold = 100;
+
+    public static int Gold
+    {
+        get
+        {
+            return mSingleton.currentGold;
+        }
+        set
+        {
+            mSingleton.currentGold = value;
+        }
+    }
+
 
     #endregion
 

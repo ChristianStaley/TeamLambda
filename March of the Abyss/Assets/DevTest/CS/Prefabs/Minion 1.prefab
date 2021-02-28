@@ -147,7 +147,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 0
-  projectile: {fileID: 5899589521235418336, guid: 1f8b6c774d23efb4c9e943e01eddd156, type: 3}
+  projectile: {fileID: 962333099126769349, guid: f6682b328c5533f45b0a464ced53009b, type: 3}
   maxHealth: 25
 --- !u!114 &-7159060592313294444
 MonoBehaviour:
