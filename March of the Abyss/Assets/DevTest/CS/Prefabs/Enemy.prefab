@@ -334,7 +334,7 @@ MonoBehaviour:
   soulDropAmount: 75
   searchTime: 100
   moveSpeed: 6
-  attackRange: 5
+  attackRange: 7
   targetMask:
     serializedVersion: 2
     m_Bits: 0
