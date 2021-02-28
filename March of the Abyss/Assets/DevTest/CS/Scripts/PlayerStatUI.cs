@@ -7,6 +7,7 @@ public class PlayerStatUI : MonoBehaviour
 {
     public Text txtHealth;
     public Text txtSouls;
+    public Text txtGold;
     
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,8 @@ public class PlayerStatUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txtHealth.text = "Health " + GM.Health;
+        txtHealth.text = + GM.Health + "/100";
         txtSouls.text = "Souls: " + GM.Souls;
+        txtGold.text = "Gold: " + GM.Gold;
     }
 }
