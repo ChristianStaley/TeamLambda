@@ -7,6 +7,8 @@ public class Slide : MonoBehaviour {
 	Image Filler;
 	public Slider slider;
 
+	public string type;
+
 	// Use this for initialization
 	void Start () {
 		Filler = GetComponent<Image>();
@@ -14,6 +16,16 @@ public class Slide : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Filler.fillAmount = slider.value;
+		//Filler.fillAmount = slider.value;
+
+		if(type.Equals("mana"))
+		{
+
+		}
+		else if (type.Equals("health"))
+		{
+			Filler.fillAmount = GM.Health/100;
+			
+		}
 	}
 }

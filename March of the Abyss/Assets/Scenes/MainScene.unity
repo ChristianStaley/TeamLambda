@@ -2930,12 +2930,8 @@ MonoBehaviour:
     Animation and Programming Assistant - Manuel Bonnet
 
 
-    Art Lead, Sound Designer
-    - Faisal Hussain
-
-
-    Programming Lead, VFX Artist, Production, Design Assistant
-    - Christian Staley'
+    Programming Lead, VFX
+    Artist, Production, Design Assistant - Christian Staley'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02cf91a803d35c04d91b642ad4f8357b, type: 2}
   m_sharedMaterial: {fileID: -3328818044624187048, guid: 02cf91a803d35c04d91b642ad4f8357b, type: 2}
@@ -6501,14 +6497,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'YE OLDE PLACEHOLDER TEXT
+  m_text: 'Left click to move character around the world. Hold to continously move.
 
 
-    Press Esc to Pause
+    Right
+    click to melee attack enemies.
 
 
-    Right Click on
-    the terrain to move'
+    Press R to raise minions from dead enemies
+    (If you have enough souls).
+
+
+    Press 1,2 and 3 for spell attacks.
+
+
+    Some
+    spells require you to aim them and press right click to release.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02cf91a803d35c04d91b642ad4f8357b, type: 2}
   m_sharedMaterial: {fileID: -3328818044624187048, guid: 02cf91a803d35c04d91b642ad4f8357b, type: 2}
@@ -12984,6 +12988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
+  type: 
 --- !u!114 &704830941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19513,6 +19518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a85f0fae27c0a46b478bd95f850c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickToLoad: 0
+  nextScene: 
 --- !u!1 &1059209101
 GameObject:
   m_ObjectHideFlags: 0
@@ -22163,7 +22170,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level_1
+          m_StringArgument: LevelDesign
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1191033781
@@ -29451,6 +29458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
+  type: 
 --- !u!114 &1581792634
 MonoBehaviour:
   m_ObjectHideFlags: 0
