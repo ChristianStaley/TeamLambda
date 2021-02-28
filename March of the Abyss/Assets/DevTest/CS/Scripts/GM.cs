@@ -40,6 +40,7 @@ public class GM : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
+
     }
 
 
@@ -70,6 +71,20 @@ public class GM : MonoBehaviour
         }
 
         return null;
+    }
+
+    public Vector3 currentSpawnLocation;
+    public static Vector3 SpawnLocation
+    {
+        get
+        {
+            return mSingleton.currentSpawnLocation;
+        }
+        set 
+        {
+            mSingleton.currentSpawnLocation = value;
+        }
+
     }
 
     #endregion
@@ -136,7 +151,7 @@ public class GM : MonoBehaviour
 
     #region Health
 
-    int currentHealth = 100;
+    public int currentHealth = 100;
     static public int Health
     {
         get
@@ -155,6 +170,24 @@ public class GM : MonoBehaviour
             }
             
 
+        }
+
+    }
+
+    #endregion
+
+    #region UI
+
+    private string currentZone = "Spawn";
+    public static string Zone
+    {
+        get
+        {
+            return mSingleton.currentZone;
+        }
+        set
+        {
+            mSingleton.currentZone = value;
         }
 
     }
@@ -378,7 +411,9 @@ public class GM : MonoBehaviour
         CountTime();
         if(currentHealth<= 0)
         {
-            SceneManager.LoadScene("MainScene");
+            
+            
+            //SceneManager.LoadScene("MainScene");
         }
     }
 

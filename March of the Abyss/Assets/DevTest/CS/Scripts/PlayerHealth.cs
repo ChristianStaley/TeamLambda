@@ -35,8 +35,13 @@ public class PlayerHealth : MonoBehaviour
 
     private void KillPlayer()
     {
+        
         pmPlayer.enabled = false;
-        //animPlayer.SetInteger("Die", 1);
+        animPlayer.SetInteger("Die", 1);
+        transform.position = GM.SpawnLocation;
+        pmPlayer.enabled = true;
+        animPlayer.SetInteger("Die", 0);
+
     }
 
     public void Damage(int damage)
