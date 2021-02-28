@@ -27,7 +27,7 @@ public class PlayerFireballAttack : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.W) && Time.time > fl_next_attack_time )
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Time.time > fl_next_attack_time )
         {   // Reset the cooldown delay
 
             GameObject spellGO = Instantiate(go_projectile, spawnPoint.position, spawnPoint.rotation);
