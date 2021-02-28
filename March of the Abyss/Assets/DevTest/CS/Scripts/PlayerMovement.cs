@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = true;
         }
 
-        if (!previewEnabled && Input.GetKeyDown(KeyCode.S))
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3))
         {
 
             previewEnabled = true;
