@@ -26,16 +26,22 @@ public class PlayerMovement : MonoBehaviour
 
     private GameObject target;
     private bool performMeleeAttack = true;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+
+        
     }
 
+    private Coroutine tempRoutine;
     void Update()
     {
+
+        
 
         if (GM.Health > 0)
         {
@@ -57,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (previewEnabled)
         {
+            
 
             RaycastHit hit;
 
@@ -81,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
                     gameObject.transform.LookAt(hit.point);
                     agent.ResetPath();
-                    spellAttack.SpawnProjectile(gameObject, hit.point);
+                    SpawnProjectile(gameObject, hit.point);
                     Destroy(tempPreview);
                     previewEnabled = false;
 
@@ -101,6 +108,36 @@ public class PlayerMovement : MonoBehaviour
         
 
     }
+    private bool rangeCooldown = false;
+    private Quaternion rotation;
+    public GameObject castPoint;
+    private Vector3 targetLocation;
+    private void SpawnProjectile(GameObject actor, Vector3 castLocation)
+    {
+        targetLocation = castLocation - castPoint.transform.position;
+        rotation = Quaternion.LookRotation(targetLocation, Vector3.up);
+
+        if (!rangeCooldown)
+        {
+            StartCoroutine(RangedAttackInterval());
+        }
+        
+    }
+
+    IEnumerator RangedAttackInterval()
+    {
+        animator.SetBool("Attack1", true);
+        GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
+        Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+        rangeCooldown = true;
+
+
+        yield return new WaitForSeconds(1f);
+
+        rangeCooldown = false;
+
+    }
+
 
     private void SetMovePosition()
     {
@@ -108,12 +145,25 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            {
+
+            }
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
             {
+                if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Hostile"))
+                {
+                    target = hit.transform.gameObject;
+                    FaceTarget(target);
+                }
+                else if(hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
+                {
+                    agent.destination = hit.point;
+                    target = null;
+                }
                 
-                agent.destination = hit.point;
             }
             
         }
@@ -121,8 +171,17 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
             {
-
-                agent.destination = hit.point;
+                if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
+                {
+                    agent.destination = hit.point;
+                    target = null;
+                }
+                else if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Hostile"))
+                {
+                    target = hit.transform.gameObject;
+                    FaceTarget(target);
+                }
+                
             }
         }
 
