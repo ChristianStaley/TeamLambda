@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCFriendly : NPC
 {
     // Start is called before the first frame update
+
     protected override void Start()
     {
         base.Start();
@@ -17,7 +18,7 @@ public class NPCFriendly : NPC
     protected override void Update()
     {
         base.Update();
-
+        anim.SetFloat("speed", 1);
     }
 
     protected override void TargetDistance()

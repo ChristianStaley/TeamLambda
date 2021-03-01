@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     public float maxDistance;
     public float minDistance;
 
+    protected Animator anim;
     
 
     [SerializeField]
@@ -55,7 +56,7 @@ public class NPC : MonoBehaviour
         //    target = player;
         //}
         lastWait = Time.deltaTime;
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -69,6 +70,8 @@ public class NPC : MonoBehaviour
         {
             case NPCState.IDLE:
                 {
+                    anim.SetFloat("Speed", 0);
+                    anim.SetBool("Attack", false);
                     StartSearch();
                     return;
                 }
@@ -76,14 +79,16 @@ public class NPC : MonoBehaviour
 
             case NPCState.MOVING:
                 {
+                    anim.SetFloat("Speed", 1);
+                    anim.SetBool("Attack", false);
                     MoveToPoint();
-                    
                     return;
                 }
 
 
             case NPCState.ATTACK:
                 {
+                    
                     AttackTarget();
                     return;
                 }
@@ -141,6 +146,7 @@ public class NPC : MonoBehaviour
     {
         if(target != null)
         {
+            anim.SetFloat("Speed", 1);
             agent.destination = target.transform.position;
         }
         
@@ -173,6 +179,7 @@ public class NPC : MonoBehaviour
                 {
                     transform.LookAt(target.transform.position);
 
+                    anim.SetBool("Attack", true);
                     GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
                     Physics.IgnoreCollision(GetComponent<Collider>(), tempProjectile.GetComponent<Collider>());
                     lastWait = Time.time + attackCooldown;
@@ -183,12 +190,14 @@ public class NPC : MonoBehaviour
             }
             else if (Vector3.Distance(target.transform.position, transform.position) >= attackRange + 1)
             {
+                anim.SetBool("Attack", false);
                 target = null;
                 StartSearch();
             }
         }
         else
         {
+            anim.SetBool("Attack", false);
             StartSearch();
         }
         

@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Checkpoint : MonoBehaviour
 {
     public GameObject player;
     public string zone;
     private Collider pCollider;
+    public Text txtLocation;
+    public string locationName;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +28,9 @@ public class Checkpoint : MonoBehaviour
         if (other == pCollider)
         {
             GM.SpawnLocation = gameObject.transform.position;
+            txtLocation.text = locationName;
             Destroy(gameObject);
         }
 
-        Debug.Log("Enter");
     }
 }

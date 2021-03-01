@@ -8,6 +8,11 @@ public class SpellAttack : MonoBehaviour
     private Vector3 target;
     private Quaternion rotation;
 
+    private bool onCooldown = true;
+
+    private GameObject actor;
+    private Vector3 actorLocation;
+
     //  !!Attack!!
     //
     //    > Press Key
@@ -42,15 +47,8 @@ public class SpellAttack : MonoBehaviour
 
     }
 
-    public void SpawnProjectile(GameObject actor, Vector3 castLocation)
-    {
-        Vector3 actorLocation = actor.transform.position;
-        target = castLocation - actorLocation;
-        rotation = Quaternion.LookRotation(target, Vector3.up);
-        GameObject newProjectile = Instantiate(GM.spell, actorLocation + new Vector3(1,0,0), rotation);
-        Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), actor.GetComponent<Collider>());
-    }
 
+    
 
 
 }
