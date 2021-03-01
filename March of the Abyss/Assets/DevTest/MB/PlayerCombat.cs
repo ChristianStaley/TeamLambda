@@ -18,22 +18,11 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            LaunchMeeleAttack(attackHitboxes[0]);
             animator.SetTrigger("Attack1");
         }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            LaunchMeeleAttack(attackHitboxes[1]);
-            animator.SetTrigger("Attack2");
-        }
+
     }
 
-    void LaunchMeeleAttack(Collider col)
-    {
-        Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("Hitbox"));
-        foreach (Collider c in cols)
-            Debug.Log(c.name);
-    }
 }
