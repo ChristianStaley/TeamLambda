@@ -8,7 +8,7 @@ public class NPCDialogue : MonoBehaviour
     public string[] st_message;
     public float fl_distance = 1;
     private GameObject go_PC;
-    private GameObject go_panel;
+    public GameObject go_panel;
     private Text txt_window;
     private int in_message_stage = 0;
     //private Text txt_NPC;
@@ -20,7 +20,7 @@ public class NPCDialogue : MonoBehaviour
     void Start()
     {
         go_PC = GameObject.FindWithTag("Player");
-        go_panel = GameObject.Find("GM").transform.Find("NPCMESSAGE").gameObject;
+        //go_panel = GameObject.Find("GM").transform.Find("NPCMESSAGE").gameObject;
         //go_panel = GameObject.Find("NPCMESSAGE");
         txt_window = go_panel.transform.Find("DialogueText").GetComponent<Text>();
         //txt_NPC= go_panel.transform.Find("MessageText").GetComponent<Text>();

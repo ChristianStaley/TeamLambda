@@ -25,6 +25,10 @@ public class NPCHealth : MonoBehaviour
     {
         CheckHealth();
         ResizeBar();
+        if (fl_HP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }//-----
 
     // ----------------------------------------------------------------------
