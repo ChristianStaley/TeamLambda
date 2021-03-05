@@ -33,10 +33,15 @@ public class PlayerFireballAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && Time.time > fl_next_attack_time )
         {   // Reset the cooldown delay
             //GM.Mana -= 10;
-            animator.SetTrigger("Attack2");
+            animator.SetBool("Attack1", true);
+            
             GameObject spellGO = Instantiate(go_projectile, spawnPoint.position, spawnPoint.rotation);
             spellGO.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * throwForce, ForceMode.Impulse);
             fl_next_attack_time = fl_cooldown + Time.time;
+        }
+        else
+        {
+            animator.SetBool("Attack1", false);
         }
     }//-----
 }
