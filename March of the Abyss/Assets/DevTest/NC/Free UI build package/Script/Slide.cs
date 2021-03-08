@@ -20,11 +20,7 @@ public class Slide : MonoBehaviour {
 
 		if(type.Equals("mana"))
 		{
-<<<<<<< Updated upstream
 			//Filler.fillAmount = GM.Mana / 100;
-=======
-			Filler.fillAmount = GM.Mana / 100;
->>>>>>> Stashed changes
 		}
 		else if (type.Equals("health"))
 		{
