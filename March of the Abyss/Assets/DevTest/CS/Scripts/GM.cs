@@ -151,7 +151,6 @@ public class GM : MonoBehaviour
 
     #region Health
 
-
     public float currentHealth = 100;
     static public float Health
     {
@@ -167,8 +166,7 @@ public class GM : MonoBehaviour
             }
             else
             {
-                
-                mSingleton.currentHealth = value;
+                mSingleton.currentHealth += value;
             }
             
 
@@ -180,28 +178,17 @@ public class GM : MonoBehaviour
 
     #region Mana
 
-<<<<<<< Updated upstream
-=======
-
-    private bool canRegenMana = true;
-    private float regenCooldown = 5f;
->>>>>>> Stashed changes
     public float currentMana = 100;
     static public float Mana
     {
         get
         {
-<<<<<<< Updated upstream
             return mSingleton.currentHealth;
-=======
-            return mSingleton.currentMana;
->>>>>>> Stashed changes
         }
         set
         {
             if (value <= 0)
             {
-<<<<<<< Updated upstream
                 mSingleton.currentHealth += value;
             }
             else
@@ -210,45 +197,10 @@ public class GM : MonoBehaviour
             }
 
 
-=======
-                mSingleton.currentMana += value;
-                mSingleton.RegenMana();
-            }
-            else
-            {
-                mSingleton.currentMana += value;
-
-               
-
-            }
-
-
-
-
->>>>>>> Stashed changes
         }
 
     }
 
-<<<<<<< Updated upstream
-=======
-
-    private void RegenMana()
-    {
-        if(regenCooldown > 0)
-        {
-            regenCooldown = 1.5f;
-        }
-        else
-        {
-            GM.mSingleton.currentMana += 20;
-            regenCooldown = 1.5f;
-        }
-            
-    }
-
-
->>>>>>> Stashed changes
     #endregion
 
     #region Gold
@@ -503,30 +455,6 @@ public class GM : MonoBehaviour
 
         IncreaseLevel();
         CountTime();
-
-        if (mSingleton.currentMana < 0)
-        {
-            mSingleton.currentMana += 0;
-
-        }
-
-        if (mSingleton.currentMana > 100)
-        {
-            mSingleton.currentMana = 100;
-        }
-
-
-        if(regenCooldown <= 0 && mSingleton.currentMana < 100)
-        {
-
-            RegenMana();
-        }
-        else if(regenCooldown > 0)
-        {
-            regenCooldown -= Time.deltaTime;
-        }
-
-
         if(currentHealth<= 0)
         {
             

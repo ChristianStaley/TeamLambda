@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = true;
         }
 
-        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3) && !rangeCooldown)
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3))
         {
 
             previewEnabled = true;
@@ -89,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
                     gameObject.transform.LookAt(hit.point);
                     agent.ResetPath();
                     SpawnProjectile(gameObject, hit.point);
-                    
                     Destroy(tempPreview);
                     previewEnabled = false;
 
@@ -97,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            if (!rangeCooldown && Input.GetKeyDown(KeyCode.S))
+            if (Time.deltaTime > lastCooldown + previewCooldown && Input.GetKeyDown(KeyCode.S))
             {
 
                 previewEnabled = false;
@@ -127,16 +126,10 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RangedAttackInterval()
     {
-        if (GM.Mana > 0)
-        {
-            animator.SetBool("Attack1", true);
-            GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
-            Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
-            GM.Mana = -20;
-            
-            rangeCooldown = true;
-        }
-        
+        animator.SetBool("Attack1", true);
+        GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
+        Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+        rangeCooldown = true;
 
 
         yield return new WaitForSeconds(1f);
