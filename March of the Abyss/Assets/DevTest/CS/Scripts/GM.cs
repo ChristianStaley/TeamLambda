@@ -176,6 +176,33 @@ public class GM : MonoBehaviour
 
     #endregion
 
+    #region Mana
+
+    public float currentMana = 100;
+    static public float Mana
+    {
+        get
+        {
+            return mSingleton.currentHealth;
+        }
+        set
+        {
+            if (value <= 0)
+            {
+                mSingleton.currentHealth += value;
+            }
+            else
+            {
+                mSingleton.currentHealth += value;
+            }
+
+
+        }
+
+    }
+
+    #endregion
+
     #region Gold
 
     private int currentGold = 100;

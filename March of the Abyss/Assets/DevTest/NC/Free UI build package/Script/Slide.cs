@@ -20,7 +20,7 @@ public class Slide : MonoBehaviour {
 
 		if(type.Equals("mana"))
 		{
-
+			//Filler.fillAmount = GM.Mana / 100;
 		}
 		else if (type.Equals("health"))
 		{

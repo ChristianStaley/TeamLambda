@@ -238,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isAttack", false);
         }
 
-        animator.SetFloat("Speed", agent.desiredVelocity.magnitude);
+        animator.SetFloat("Speed", agent.desiredVelocity.magnitude, 0.1f, Time.deltaTime);
     }
 
     IEnumerator MeleeAttackInterval()

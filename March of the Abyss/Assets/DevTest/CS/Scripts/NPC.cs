@@ -70,7 +70,7 @@ public class NPC : MonoBehaviour
         {
             case NPCState.IDLE:
                 {
-                    anim.SetFloat("Speed", 0);
+                    anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
                     anim.SetBool("Attack", false);
                     StartSearch();
                     return;
@@ -79,7 +79,7 @@ public class NPC : MonoBehaviour
 
             case NPCState.MOVING:
                 {
-                    anim.SetFloat("Speed", 1);
+                    anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
                     anim.SetBool("Attack", false);
                     MoveToPoint();
                     return;
@@ -146,7 +146,7 @@ public class NPC : MonoBehaviour
     {
         if(target != null)
         {
-            anim.SetFloat("Speed", 1);
+            anim.SetFloat("Speed", 1,0.1f, Time.deltaTime);
             agent.destination = target.transform.position;
         }
         
@@ -228,9 +228,12 @@ public class NPC : MonoBehaviour
     {
         //Insert death anim
         //Insert death effect
+        anim.SetBool("Dead", true);
+        anim.SetBool("Attack", false);
         GM.Souls = soulDropAmount;
+
         Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);      
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject, 5f);
         this.enabled = false;
     }
 
