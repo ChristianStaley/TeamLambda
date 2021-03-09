@@ -12,6 +12,8 @@ public class NPCHealth : MonoBehaviour
     private Transform tx_HP_bar;
     public GameObject go_hit_text;
 
+    public Animator anim;
+
     // ----------------------------------------------------------------------
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,11 @@ public class NPCHealth : MonoBehaviour
     {
         CheckHealth();
         ResizeBar();
+        if (fl_HP <= 0)
+        {
+            anim.SetBool("Dead", true);
+            //Destroy(gameObject);
+        }
     }//-----
 
     // ----------------------------------------------------------------------

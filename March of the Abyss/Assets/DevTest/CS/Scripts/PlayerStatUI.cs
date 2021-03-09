@@ -18,7 +18,7 @@ public class PlayerStatUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txtHealth.text = + GM.Health + "/100";
+        txtHealth.text = + GM.Health + "/ 100";
         txtSouls.text = "Souls: " + GM.Souls;
         txtGold.text = "Gold: " + GM.Gold;
     }
