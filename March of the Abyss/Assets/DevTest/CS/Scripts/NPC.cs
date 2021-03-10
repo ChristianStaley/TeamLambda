@@ -29,8 +29,7 @@ public class NPC : MonoBehaviour
 
     public NPCState currentState = NPCState.IDLE;
 
-    [SerializeField]
-    protected int soulDropAmount;
+
 
     public float searchTime;
     protected NavMeshAgent agent;
@@ -67,14 +66,17 @@ public class NPC : MonoBehaviour
         if(!ignorePlayer)
         TargetDistance();
 
-        Debug.Log("Time wait" + lastWait);
 
         switch (currentState)
         {
             case NPCState.IDLE:
                 {
-                    anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
-                    anim.SetBool("Attack", false);
+                    if(anim != null)
+                    {
+                        anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+                        anim.SetBool("Attack", false);
+                    }
+                        
                     StartSearch();
                     return;
                 }
@@ -82,8 +84,12 @@ public class NPC : MonoBehaviour
 
             case NPCState.MOVING:
                 {
-                    anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
-                    anim.SetBool("Attack", false);
+
+                    if(anim != null)
+                    {
+                        anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+                        anim.SetBool("Attack", false);
+                    }
                     MoveToPoint();
                     return;
                 }
@@ -248,10 +254,11 @@ public class NPC : MonoBehaviour
         //Insert death effect
         anim.SetBool("Dead", true);
         anim.SetBool("Attack", false);
-        GM.Souls = soulDropAmount;
+        
 
         Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);      
         Destroy(this.gameObject, 5f);
+        gameObject.GetComponent<NPCHealth>().enabled = false;
         this.enabled = false;
     }
 
