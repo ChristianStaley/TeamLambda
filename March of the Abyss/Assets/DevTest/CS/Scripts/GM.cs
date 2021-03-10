@@ -511,6 +511,8 @@ public class GM : MonoBehaviour
             
             //SceneManager.LoadScene("MainScene");
         }
+
+        Debug.Log("Current Spell: " + mSingleton.currentSpell);
     }
 
     #endregion
