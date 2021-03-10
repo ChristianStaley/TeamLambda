@@ -7,6 +7,7 @@ public class Projectile : BaseProjectile
 
     public GameObject preview;
     private bool gravity;
+    
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Projectile : BaseProjectile
 
     void OnCollisionEnter(Collision other)
     {
+        
         other.collider.gameObject.SendMessage("Damage", fl_damage, SendMessageOptions.DontRequireReceiver);
         Destroy(this.gameObject);
     }

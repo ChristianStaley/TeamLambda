@@ -146,22 +146,43 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+
+    GameObject newProjectile;
+    GameObject newProjectileSpray;
     IEnumerator RangedAttackInterval()
     {
-        if (GM.Mana > 0)
+        if (GM.Mana > 0 && GM.ChangeSpell != 0)
         {
             animator.SetBool("Attack1", true);
-            GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
+            newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
             Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
             GM.Mana = -20;
-            
+
             rangeCooldown = true;
         }
-        
+
+        else if (GM.ChangeSpell == 0)
+        {
+            animator.SetBool("Attack1", true);
+            agent.isStopped = true;
+            newProjectileSpray = Instantiate(GM.spell, castPoint.transform.position, rotation);
+            Physics.IgnoreCollision(newProjectileSpray.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            newProjectileSpray.GetComponent<ParticleSystem>().Play();
+            GM.Mana = -20;
+
+            rangeCooldown = true;
+        }
+
 
 
         yield return new WaitForSeconds(1f);
 
+        if (GM.ChangeSpell == 0 && newProjectileSpray != null)
+        {
+            newProjectileSpray.GetComponent<ParticleSystem>().Stop();
+            agent.isStopped = false;
+        }
+        
         rangeCooldown = false;
 
     }
