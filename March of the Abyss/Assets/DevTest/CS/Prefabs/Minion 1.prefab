@@ -138,14 +138,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   maxDistance: 16
-  minDistance: 3
+  minDistance: 1
   ignorePlayer: 0
   deadBody: {fileID: 0}
   currentState: 0
   soulDropAmount: 0
   searchTime: 100
   moveSpeed: 8
-  attackRange: 4
+  attackRange: 2
   targetMask:
     serializedVersion: 2
     m_Bits: 0

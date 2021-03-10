@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject target;
     private bool performMeleeAttack = true;
 
+    private int activeSpell = 0;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -52,12 +54,31 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = true;
         }
 
-        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3))
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha1) && !rangeCooldown)
         {
 
             previewEnabled = true;
+            GM.ChangeSpell = 0;
             lastCooldown = Time.deltaTime;
             
+        }
+
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha2) && !rangeCooldown)
+        {
+
+            previewEnabled = true;
+            GM.ChangeSpell = 1;
+            lastCooldown = Time.deltaTime;
+
+        }
+
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3) && !rangeCooldown)
+        {
+
+            previewEnabled = true;
+            GM.ChangeSpell = 2;
+            lastCooldown = Time.deltaTime;
+
         }
 
 
@@ -89,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
                     gameObject.transform.LookAt(hit.point);
                     agent.ResetPath();
                     SpawnProjectile(gameObject, hit.point);
+                    
                     Destroy(tempPreview);
                     previewEnabled = false;
 
@@ -96,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            if (Time.deltaTime > lastCooldown + previewCooldown && Input.GetKeyDown(KeyCode.S))
+            if (!rangeCooldown && Input.GetKeyDown(KeyCode.S))
             {
 
                 previewEnabled = false;
@@ -126,10 +148,16 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RangedAttackInterval()
     {
-        animator.SetBool("Attack1", true);
-        GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
-        Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
-        rangeCooldown = true;
+        if (GM.Mana > 0)
+        {
+            animator.SetBool("Attack1", true);
+            GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
+            Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            GM.Mana = -20;
+            
+            rangeCooldown = true;
+        }
+        
 
 
         yield return new WaitForSeconds(1f);
