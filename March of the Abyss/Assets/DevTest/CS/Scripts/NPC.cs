@@ -47,6 +47,7 @@ public class NPC : MonoBehaviour
         agent.speed = moveSpeed;
         agent.angularSpeed = 250;
         agent.acceleration = 100;
+        rb.constraints = RigidbodyConstraints.FreezeRotationY;
         if (player == null)
         {
             player = GameObject.Find("Player");
@@ -65,6 +66,8 @@ public class NPC : MonoBehaviour
         CheckHealth();
         if(!ignorePlayer)
         TargetDistance();
+
+        Debug.Log("Time wait" + lastWait);
 
         switch (currentState)
         {
@@ -112,7 +115,7 @@ public class NPC : MonoBehaviour
             }
             else if (currentDistance <= attackRange)
             {
-                transform.LookAt(target.transform.position);
+                
                 currentState = NPCState.ATTACK;
             }
 
@@ -167,6 +170,10 @@ public class NPC : MonoBehaviour
     private float lastWait;
     public GameObject projectile;
     private Transform attackTarget;
+    public float turnRate;
+    Quaternion targetRotation;
+    float str;
+
 
     protected virtual void AttackTarget()
     {
@@ -175,20 +182,30 @@ public class NPC : MonoBehaviour
             if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
             {
 
+                targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                str = Mathf.Min(turnRate * Time.deltaTime, 1);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+
                 if (Time.time > lastWait)
                 {
-                    transform.LookAt(target.transform.position);
+
+                    targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
 
                     anim.SetBool("Attack", true);
-                    GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                    GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
                     Physics.IgnoreCollision(GetComponent<Collider>(), tempProjectile.GetComponent<Collider>());
                     lastWait = Time.time + attackCooldown;
-
-
+                    
+                }
+                else
+                {
+                   
                 }
 
             }
-            else if (Vector3.Distance(target.transform.position, transform.position) >= attackRange + 1)
+            else if (Vector3.Distance(target.transform.position, transform.position) > attackRange)
             {
                 anim.SetBool("Attack", false);
                 target = null;
@@ -198,6 +215,7 @@ public class NPC : MonoBehaviour
         else
         {
             anim.SetBool("Attack", false);
+            
             StartSearch();
         }
         

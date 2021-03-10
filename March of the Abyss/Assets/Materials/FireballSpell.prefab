@@ -4826,7 +4826,7 @@ GameObject:
   - component: {fileID: 3013637470347789129}
   - component: {fileID: 2128714643115399680}
   - component: {fileID: 5643571900307985706}
-  - component: {fileID: 5158147336273640909}
+  - component: {fileID: -1366110974022686194}
   m_Layer: 0
   m_Name: FireballSpell
   m_TagString: Untagged
@@ -4931,7 +4931,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5158147336273640909
+--- !u!114 &-1366110974022686194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4940,12 +4940,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9093042612015152753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7685eee8fc3d774fac758e710b095a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 514936ab079a0e74e96b7f236cd9b80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fl_range: 20
-  fl_speed: 10
-  fl_damage: 10
+  range: 20
+  preview: {fileID: 8663945752511305404, guid: a0967e15e427e7b4f92abaccc8ce4266, type: 3}
 --- !u!1001 &107485915136767839
 PrefabInstance:
   m_ObjectHideFlags: 0

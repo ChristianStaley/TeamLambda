@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject target;
     private bool performMeleeAttack = true;
 
+    private int activeSpell = 0;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -52,12 +54,31 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = true;
         }
 
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha1) && !rangeCooldown)
+        {
+
+            previewEnabled = true;
+            GM.ChangeSpell = 0;
+            lastCooldown = Time.deltaTime;
+            
+        }
+
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha2) && !rangeCooldown)
+        {
+
+            previewEnabled = true;
+            GM.ChangeSpell = 1;
+            lastCooldown = Time.deltaTime;
+
+        }
+
         if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3) && !rangeCooldown)
         {
 
             previewEnabled = true;
+            GM.ChangeSpell = 2;
             lastCooldown = Time.deltaTime;
-            
+
         }
 
 

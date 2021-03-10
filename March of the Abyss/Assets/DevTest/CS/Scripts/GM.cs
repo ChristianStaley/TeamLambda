@@ -78,10 +78,13 @@ public class GM : MonoBehaviour
     {
         get
         {
+            Debug.Log("Returning Transform: " + mSingleton.currentSpawnLocation);
             return mSingleton.currentSpawnLocation;
+
         }
         set 
         {
+            Debug.Log("Setting Transform: " + value);
             mSingleton.currentSpawnLocation = value;
         }
 
@@ -134,16 +137,15 @@ public class GM : MonoBehaviour
 
     }
 
-    public static void ChangeSpell(int n)
+    public static int ChangeSpell
     {
-        mSingleton.currentSpell += n;
-        if (mSingleton.currentSpell < 0)
+        get
         {
-            //mSingleton.currentSpell = spellMaxRange;
+            return mSingleton.currentSpell;
         }
-        else if (mSingleton.currentSpell > 1)
+        set
         {
-            //mSingleton.currentSpell = spellMinRange;
+            mSingleton.currentSpell = value;
         }
     }
 
@@ -195,6 +197,7 @@ public class GM : MonoBehaviour
             if (value <= 0)
             {
                 mSingleton.currentMana += value;
+                mSingleton.RegenMana();
             }
             else
             {
@@ -480,7 +483,7 @@ public class GM : MonoBehaviour
 
         if (mSingleton.currentMana < 0)
         {
-            mSingleton.currentMana += 0;
+            mSingleton.currentMana = 0;
 
         }
 
@@ -495,11 +498,12 @@ public class GM : MonoBehaviour
 
             RegenMana();
         }
-        else if(regenCooldown > 0)
+        else if(regenCooldown > 0 && mSingleton.currentMana < 100)
         {
             regenCooldown -= Time.deltaTime;
         }
 
+        Debug.Log("Time Left: " + regenCooldown);
 
         if(currentHealth<= 0)
         {
