@@ -182,21 +182,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  maxDistance: 10
-  minDistance: 5
+  maxDistance: 15
+  minDistance: 10
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
   currentState: 0
-  soulDropAmount: 75
   searchTime: 100
-  moveSpeed: 6
+  moveSpeed: 8
   attackRange: 10
   targetMask:
     serializedVersion: 2
     m_Bits: 0
   projectile: {fileID: 612243436323064019, guid: 5881b3514a6c68e4d8042e50b66ba8ea, type: 3}
-  turnRate: 15
+  turnRate: 30
   maxHealth: 75
+  goldDropped: 0
+  soulDropAmount: 75
 --- !u!114 &1432661669
 MonoBehaviour:
   m_ObjectHideFlags: 0

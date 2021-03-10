@@ -503,7 +503,6 @@ public class GM : MonoBehaviour
             regenCooldown -= Time.deltaTime;
         }
 
-        Debug.Log("Time Left: " + regenCooldown);
 
         if(currentHealth<= 0)
         {

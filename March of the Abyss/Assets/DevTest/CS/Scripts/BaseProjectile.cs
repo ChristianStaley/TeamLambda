@@ -5,13 +5,15 @@ using UnityEngine;
 public class BaseProjectile : MonoBehaviour
 {
 
-
-    protected float fl_range = 20;
+    [SerializeField]
+    public float fl_range = 10;
     [SerializeField]
     protected float fl_speed = 10;
+    [SerializeField]
     protected float fl_damage = 10;
+    [SerializeField]
     protected bool bl_use_Trigger = false;
-    public float range = 20;
+
 
     
     

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 338570143855141850}
   - component: {fileID: 4490560730247527874}
   - component: {fileID: 1059297625775038487}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Spell1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294203603030675031}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0.87}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3614,7 +3614,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
@@ -4828,9 +4828,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514936ab079a0e74e96b7f236cd9b80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fl_speed: 0.1
-  range: 5
+  fl_range: 5
+  fl_speed: 0.001
+  fl_damage: 1
+  bl_use_Trigger: 1
   preview: {fileID: 8663945752511305404, guid: a0967e15e427e7b4f92abaccc8ce4266, type: 3}
+  constantDamage: 1
+  constantAttackCooldown: 0.1
+  duration: 1.5
 --- !u!54 &338570143855141850
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4839,13 +4844,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294203603030675031}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 36
   m_CollisionDetection: 0
 --- !u!114 &4490560730247527874
 MonoBehaviour:
@@ -4867,8 +4872,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294203603030675031}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.2101598, y: 3.1658444, z: 11.583662}
+  m_Size: {x: 2, y: 2, z: 10}
   m_Center: {x: 0.06880975, y: -0.052862644, z: 5.0396357}
