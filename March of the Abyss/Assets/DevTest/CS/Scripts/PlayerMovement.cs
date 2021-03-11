@@ -5,16 +5,14 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //Might as well be called Player script. Basically everything is in the one script
+    
+    
     //Private
     private Rigidbody rb;
     Animator animator;
     NavMeshAgent agent;
     private bool previewEnabled = false;
-
-    //Public
-    public float moveSpeed;
-    public GameObject mousePos;
-    public Collider colliderPlayer;
 
     private SpellAttack spellAttack = new SpellAttack();
     private MeleeAttack meleeAttack = new MeleeAttack();
@@ -27,6 +25,15 @@ public class PlayerMovement : MonoBehaviour
     private GameObject target;
     private bool performMeleeAttack = true;
 
+    private int activeSpell = 0;
+
+    //Public
+    public float moveSpeed;
+    public GameObject mousePos;
+    public Collider colliderPlayer;
+
+  
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -37,7 +44,20 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private Coroutine tempRoutine;
+    IEnumerator RespawnDelay()
+    {
+
+        agent.enabled = false;
+        agent.ResetPath();
+
+        agent.Warp(GM.SpawnLocation);
+
+        yield return new WaitForSeconds(0.1f);
+        agent.enabled = true;
+
+    }
+
+    
     void Update()
     {
 
@@ -45,19 +65,42 @@ public class PlayerMovement : MonoBehaviour
 
         if (GM.Health > 0)
         {
+            
             SetMovePosition();
         }
-        else
+        else if(GM.Health < 1 && agent.enabled == false)
         {
-            agent.isStopped = true;
+            Debug.Log("Respawn");
+
+            //StartCoroutine(RespawnDelay());
+            
         }
 
-        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3))
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha1) && !rangeCooldown)
         {
 
             previewEnabled = true;
+            GM.ChangeSpell = 0;
             lastCooldown = Time.deltaTime;
             
+        }
+
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha2) && !rangeCooldown)
+        {
+
+            previewEnabled = true;
+            GM.ChangeSpell = 1;
+            lastCooldown = Time.deltaTime;
+
+        }
+
+        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3) && !rangeCooldown)
+        {
+
+            previewEnabled = true;
+            GM.ChangeSpell = 2;
+            lastCooldown = Time.deltaTime;
+
         }
 
 
@@ -73,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9) && Vector3.Distance(gameObject.transform.position, tempPreview.transform.position) <= GM.spell.GetComponent<Projectile>().range)
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))// && Vector3.Distance(gameObject.transform.position, tempPreview.transform.position) <= GM.spell.GetComponent<Projectile>().fl_range)
             {
                 tempPreview.transform.position = Vector3.MoveTowards(tempPreview.transform.position, hit.point, 2f);
             }
@@ -89,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
                     gameObject.transform.LookAt(hit.point);
                     agent.ResetPath();
                     SpawnProjectile(gameObject, hit.point);
+                    
                     Destroy(tempPreview);
                     previewEnabled = false;
 
@@ -96,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            if (Time.deltaTime > lastCooldown + previewCooldown && Input.GetKeyDown(KeyCode.S))
+            if (!rangeCooldown && Input.GetKeyDown(KeyCode.S))
             {
 
                 previewEnabled = false;
@@ -124,16 +168,46 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+
+    GameObject newProjectile;
+    GameObject newProjectileSpray;
     IEnumerator RangedAttackInterval()
     {
-        animator.SetBool("Attack1", true);
-        GameObject newProjectile = Instantiate(GM.spell, castPoint.transform.position, rotation);
-        Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
-        rangeCooldown = true;
+        if (GM.Mana > 0 && GM.ChangeSpell != 0)
+        {
+            animator.SetBool("Attack1", true);
+            agent.isStopped = true;
+            yield return new WaitForSeconds(0.2f);
+            agent.isStopped = false;
+            newProjectile = Instantiate(GM.spell, castPoint.transform.position + new Vector3(0, 1, 0), rotation);
+            Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            GM.Mana = -20;
+
+            rangeCooldown = true;
+        }
+
+        else if (GM.Mana > 0 && GM.ChangeSpell == 0)
+        {
+            animator.SetBool("Attack1", true);
+            agent.isStopped = true;
+            newProjectileSpray = Instantiate(GM.spell, castPoint.transform.position + new Vector3(0, 1, 0), rotation);
+            Physics.IgnoreCollision(newProjectileSpray.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            newProjectileSpray.GetComponent<ParticleSystem>().Play();
+            GM.Mana = -20;
+
+            rangeCooldown = true;
+        }
+
 
 
         yield return new WaitForSeconds(1f);
 
+        if (GM.ChangeSpell == 0 && newProjectileSpray != null)
+        {
+            newProjectileSpray.GetComponent<ParticleSystem>().Stop();
+           
+        }
+        agent.isStopped = false;
         rangeCooldown = false;
 
     }
@@ -185,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !previewEnabled)
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
@@ -204,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
 
-        if(target != null)
+        if(target != null && !previewEnabled)
         {
             FaceTarget(target);
 

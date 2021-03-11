@@ -18,7 +18,10 @@ public class NPCFriendly : NPC
     protected override void Update()
     {
         base.Update();
-        anim.SetFloat("speed", 1);
+        if (anim != null)
+        {
+            anim.SetFloat("speed", 1);
+        }
     }
 
     protected override void TargetDistance()
