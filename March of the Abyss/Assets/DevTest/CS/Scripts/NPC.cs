@@ -29,8 +29,7 @@ public class NPC : MonoBehaviour
 
     public NPCState currentState = NPCState.IDLE;
 
-    [SerializeField]
-    protected int soulDropAmount;
+
 
     public float searchTime;
     protected NavMeshAgent agent;
@@ -41,12 +40,14 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        cc_NPC = GetComponent<CharacterController>();
         currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         agent.speed = moveSpeed;
         agent.angularSpeed = 250;
         agent.acceleration = 100;
+        rb.constraints = RigidbodyConstraints.FreezeRotationY;
         if (player == null)
         {
             player = GameObject.Find("Player");
@@ -66,12 +67,20 @@ public class NPC : MonoBehaviour
         if(!ignorePlayer)
         TargetDistance();
 
+
         switch (currentState)
         {
             case NPCState.IDLE:
                 {
-                    anim.SetFloat("Speed", 0);
-                    anim.SetBool("Attack", false);
+                    if(anim != null)
+                    {
+                        anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+                        anim.SetBool("Attack", false);
+                    }
+                    else
+                    {
+                        Patrol();
+                    }
                     StartSearch();
                     return;
                 }
@@ -79,8 +88,12 @@ public class NPC : MonoBehaviour
 
             case NPCState.MOVING:
                 {
-                    anim.SetFloat("Speed", 1);
-                    anim.SetBool("Attack", false);
+
+                    if(anim != null)
+                    {
+                        anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+                        anim.SetBool("Attack", false);
+                    }
                     MoveToPoint();
                     return;
                 }
@@ -112,7 +125,7 @@ public class NPC : MonoBehaviour
             }
             else if (currentDistance <= attackRange)
             {
-                transform.LookAt(target.transform.position);
+                
                 currentState = NPCState.ATTACK;
             }
 
@@ -146,7 +159,7 @@ public class NPC : MonoBehaviour
     {
         if(target != null)
         {
-            anim.SetFloat("Speed", 1);
+            anim.SetFloat("Speed", 1,0.1f, Time.deltaTime);
             agent.destination = target.transform.position;
         }
         
@@ -167,6 +180,10 @@ public class NPC : MonoBehaviour
     private float lastWait;
     public GameObject projectile;
     private Transform attackTarget;
+    public float turnRate;
+    Quaternion targetRotation;
+    float str;
+
 
     protected virtual void AttackTarget()
     {
@@ -175,20 +192,30 @@ public class NPC : MonoBehaviour
             if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
             {
 
+                targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                str = Mathf.Min(turnRate * Time.deltaTime, 1);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+
                 if (Time.time > lastWait)
                 {
-                    transform.LookAt(target.transform.position);
+
+                    targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
 
                     anim.SetBool("Attack", true);
-                    GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                    GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
                     Physics.IgnoreCollision(GetComponent<Collider>(), tempProjectile.GetComponent<Collider>());
                     lastWait = Time.time + attackCooldown;
-
-
+                    
+                }
+                else
+                {
+                   
                 }
 
             }
-            else if (Vector3.Distance(target.transform.position, transform.position) >= attackRange + 1)
+            else if (Vector3.Distance(target.transform.position, transform.position) > attackRange)
             {
                 anim.SetBool("Attack", false);
                 target = null;
@@ -198,6 +225,7 @@ public class NPC : MonoBehaviour
         else
         {
             anim.SetBool("Attack", false);
+            
             StartSearch();
         }
         
@@ -228,9 +256,13 @@ public class NPC : MonoBehaviour
     {
         //Insert death anim
         //Insert death effect
-        GM.Souls = soulDropAmount;
+        anim.SetBool("Dead", true);
+        anim.SetBool("Attack", false);
+        
+
         Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);      
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject, 5f);
+        gameObject.GetComponent<NPCHealth>().enabled = false;
         this.enabled = false;
     }
 
@@ -266,5 +298,35 @@ public class NPC : MonoBehaviour
             }
         }
     }
+    #region Patrol
 
+    [SerializeField]
+    public GameObject[] gos_waypoints;
+    public float fl_speed = 3;
+    private int in_next_wp = 0;
+
+    private CharacterController cc_NPC;
+    protected virtual void Patrol()
+    {
+
+        //Are there any waypoints defined?
+        if (gos_waypoints.Length > 0)
+        {   // Look at the next WP
+            transform.LookAt(gos_waypoints[in_next_wp].transform.position);
+
+            // Move towards the WP
+            cc_NPC.SimpleMove(fl_speed * transform.TransformDirection(Vector3.forward));
+
+            // if we get close move to WP target the next
+            if (Vector3.Distance(gos_waypoints[in_next_wp].transform.position, transform.position) < 1)
+            {
+                if (in_next_wp < gos_waypoints.Length - 1)
+                    in_next_wp++;
+                else
+                    in_next_wp = 0;
+            }
+        }
+
+    }
+    #endregion Patrol
 }

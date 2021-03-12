@@ -78,10 +78,13 @@ public class GM : MonoBehaviour
     {
         get
         {
+            Debug.Log("Returning Transform: " + mSingleton.currentSpawnLocation);
             return mSingleton.currentSpawnLocation;
+
         }
         set 
         {
+            Debug.Log("Setting Transform: " + value);
             mSingleton.currentSpawnLocation = value;
         }
 
@@ -134,22 +137,22 @@ public class GM : MonoBehaviour
 
     }
 
-    public static void ChangeSpell(int n)
+    public static int ChangeSpell
     {
-        mSingleton.currentSpell += n;
-        if (mSingleton.currentSpell < 0)
+        get
         {
-            //mSingleton.currentSpell = spellMaxRange;
+            return mSingleton.currentSpell;
         }
-        else if (mSingleton.currentSpell > 1)
+        set
         {
-            //mSingleton.currentSpell = spellMinRange;
+            mSingleton.currentSpell = value;
         }
     }
 
     #endregion
 
     #region Health
+
 
     public float currentHealth = 100;
     static public float Health
@@ -166,12 +169,61 @@ public class GM : MonoBehaviour
             }
             else
             {
-                mSingleton.currentHealth += value;
+                
+                mSingleton.currentHealth = value;
             }
             
 
         }
 
+    }
+
+    #endregion
+
+    #region Mana
+
+
+    private bool canRegenMana = true;
+    private float regenCooldown = 5f;
+    public float currentMana = 100;
+    static public float Mana
+    {
+        get
+        {
+            return mSingleton.currentMana;
+        }
+        set
+        {
+            if (value <= 0)
+            {
+                mSingleton.currentMana += value;
+                mSingleton.RegenMana();
+            }
+            else
+            {
+                mSingleton.currentMana += value;
+                mSingleton.RegenMana();
+            }
+
+
+
+        }
+
+    }
+
+
+    private void RegenMana()
+    {
+        if(regenCooldown > 0)
+        {
+            regenCooldown = 1.5f;
+        }
+        else
+        {
+            GM.mSingleton.currentMana += 20;
+            regenCooldown = 1.5f;
+        }
+            
     }
 
     #endregion
@@ -428,12 +480,38 @@ public class GM : MonoBehaviour
 
         IncreaseLevel();
         CountTime();
+
+        if (mSingleton.currentMana < 0)
+        {
+            mSingleton.currentMana = 0;
+
+        }
+
+        if (mSingleton.currentMana > 100)
+        {
+            mSingleton.currentMana = 100;
+        }
+
+
+        if(regenCooldown <= 0 && mSingleton.currentMana < 100)
+        {
+
+            RegenMana();
+        }
+        else if(regenCooldown > 0 && mSingleton.currentMana < 100)
+        {
+            regenCooldown -= Time.deltaTime;
+        }
+
+
         if(currentHealth<= 0)
         {
             
             
             //SceneManager.LoadScene("MainScene");
         }
+
+        //Debug.Log("Current Spell: " + mSingleton.currentSpell);
     }
 
     #endregion

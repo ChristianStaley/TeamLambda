@@ -4,14 +4,33 @@ using UnityEngine;
 
 public class Projectile : BaseProjectile
 {
-
+    private Rigidbody rb;
     public GameObject preview;
     private bool gravity;
+    public bool constantDamage = false;
+    public float constantAttackCooldown = 0.1f;
+    private float lastTime;
+    public float duration = 1.5f;
+
+    private Collider cl;
+
 
     void Start()
     {
-        Destroy(this.gameObject, fl_range / fl_speed);
-        GetComponent<Rigidbody>().velocity = fl_speed * transform.TransformDirection(Vector3.forward);
+
+        rb = GetComponent<Rigidbody>();
+        Physics.IgnoreLayerCollision(12, 12);
+
+        if (!constantDamage)
+        {
+            Destroy(this.gameObject, fl_range / fl_speed);
+        }
+
+        cl = GetComponent<Collider>();
+
+        rb.velocity = fl_speed * transform.TransformDirection(Vector3.forward);
+
+        lastTime = constantAttackCooldown;
 
         if (bl_use_Trigger)
             GetComponent<Collider>().isTrigger = true;
@@ -20,13 +39,42 @@ public class Projectile : BaseProjectile
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
         }
-    } 
 
-    void OnCollisionEnter(Collision other)
+        if (duration == 0)
+        {
+            duration = 1f;
+        }
+
+        if (constantDamage)
+        {
+            Destroy(gameObject, duration);
+        }
+    }
+
+    private void Update()
     {
-        other.collider.gameObject.SendMessage("Damage", fl_damage, SendMessageOptions.DontRequireReceiver);
-        Destroy(this.gameObject);
+        lastTime -= Time.deltaTime;
     }
 
 
+    void OnCollisionEnter(Collision other)
+    {
+
+        if (!constantDamage)
+        {
+            other.collider.gameObject.SendMessage("Damage", fl_damage, SendMessageOptions.DontRequireReceiver);
+            Destroy(this.gameObject);
+        }
+
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+
+        other.gameObject.SendMessage("Damage", fl_damage, SendMessageOptions.DontRequireReceiver);
+
+    }
+
 }
+    
