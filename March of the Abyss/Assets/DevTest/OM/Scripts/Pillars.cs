@@ -11,7 +11,7 @@ public class Pillars : MonoBehaviour
     public float fl_max_HP = 100;
     private Transform tx_HP_bar;
     public GameObject go_hit_text;
-    public Animator anim;
+    //public Animator anim;
 
     void Start()
     {
@@ -24,43 +24,44 @@ public class Pillars : MonoBehaviour
         CheckHealth();
         ResizeBar();
         //IsDead();
-        switch (currentState)
-        {
-            case NPCState.IDLE:
-                {
+        //switch (currentState)
+        //{
+        //    case NPCState.IDLE:
+        //        {
 
-                    anim.SetBool("Dead", false);
+        //            anim.SetBool("Dead", false);
 
-                    return;
-                }
-
-
-            case NPCState.DEAD:
-                {
-
-                    anim.SetBool("Idle", false);
-
-                    return;
-                }
+        //            return;
+        //        }
 
 
-        }//-----
+        //    case NPCState.DEAD:
+        //        {
+
+        //            anim.SetBool("Idle", false);
+
+        //            return;
+        //        }
+
+
+        //}//-----
     }
 
-    public enum NPCState
-    {
-        IDLE,
-        DEAD
+    //public enum NPCState
+    //{
+    //    IDLE,
+    //    DEAD
 
-    }
+    //}
 
-    public NPCState currentState = NPCState.IDLE;
+    //public NPCState currentState = NPCState.IDLE;
 
     void CheckHealth()
     {
         if (fl_HP <= 0)
         {
-            anim.SetBool("Dead", true);
+            Destroy(gameObject);
+            //anim.SetBool("Dead", true);
         }
 
     }
