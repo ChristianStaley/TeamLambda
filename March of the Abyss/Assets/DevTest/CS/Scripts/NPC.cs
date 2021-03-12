@@ -40,6 +40,7 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        cc_NPC = GetComponent<CharacterController>();
         currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -76,7 +77,10 @@ public class NPC : MonoBehaviour
                         anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
                         anim.SetBool("Attack", false);
                     }
-                        
+                    else
+                    {
+                        Patrol();
+                    }
                     StartSearch();
                     return;
                 }
@@ -294,5 +298,35 @@ public class NPC : MonoBehaviour
             }
         }
     }
+    #region Patrol
 
+    [SerializeField]
+    public GameObject[] gos_waypoints;
+    public float fl_speed = 3;
+    private int in_next_wp = 0;
+
+    private CharacterController cc_NPC;
+    protected virtual void Patrol()
+    {
+
+        //Are there any waypoints defined?
+        if (gos_waypoints.Length > 0)
+        {   // Look at the next WP
+            transform.LookAt(gos_waypoints[in_next_wp].transform.position);
+
+            // Move towards the WP
+            cc_NPC.SimpleMove(fl_speed * transform.TransformDirection(Vector3.forward));
+
+            // if we get close move to WP target the next
+            if (Vector3.Distance(gos_waypoints[in_next_wp].transform.position, transform.position) < 1)
+            {
+                if (in_next_wp < gos_waypoints.Length - 1)
+                    in_next_wp++;
+                else
+                    in_next_wp = 0;
+            }
+        }
+
+    }
+    #endregion Patrol
 }
