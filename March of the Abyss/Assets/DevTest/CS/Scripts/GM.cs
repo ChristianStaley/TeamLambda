@@ -184,7 +184,7 @@ public class GM : MonoBehaviour
 
 
     private bool canRegenMana = true;
-    private float regenCooldown = 5f;
+    private float regenCooldown = 2f;
     public float currentMana = 100;
     static public float Mana
     {
@@ -216,12 +216,12 @@ public class GM : MonoBehaviour
     {
         if(regenCooldown > 0)
         {
-            regenCooldown = 1.5f;
+            regenCooldown = 2f;
         }
         else
         {
             GM.mSingleton.currentMana += 20;
-            regenCooldown = 1.5f;
+            regenCooldown = 2f;
         }
             
     }

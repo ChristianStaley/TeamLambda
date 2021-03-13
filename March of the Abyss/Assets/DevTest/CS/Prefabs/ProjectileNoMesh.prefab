@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fl_range: 20
-  fl_speed: 10
+  fl_speed: 15
   fl_damage: 10
   bl_use_Trigger: 0
   preview: {fileID: 0}

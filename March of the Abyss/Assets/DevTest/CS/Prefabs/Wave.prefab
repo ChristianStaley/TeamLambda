@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fl_range: 10
   fl_speed: 5
-  fl_damage: 10
+  fl_damage: 25
   bl_use_Trigger: 0
   preview: {fileID: 8663945752511305404, guid: a0967e15e427e7b4f92abaccc8ce4266, type: 3}
   constantDamage: 0
