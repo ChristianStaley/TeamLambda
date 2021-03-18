@@ -56,11 +56,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
     void Update()
     {
 
-        
+
 
         if (GM.Health > 0)
         {
