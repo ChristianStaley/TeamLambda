@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject mousePos;
     public Collider colliderPlayer;
 
+    public GameObject pauseMenuPanel;
   
 
     void Start()
@@ -40,10 +41,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-
-        
     }
-
+    
     IEnumerator RespawnDelay()
     {
 
@@ -57,11 +56,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
     void Update()
     {
 
-        
+
 
         if (GM.Health > 0)
         {
@@ -149,14 +147,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
+        if ((Input.GetKeyDown(KeyCode.Escape)))
+        {
+            pauseMenuPanel.gameObject.SetActive(!pauseMenuPanel.gameObject.activeSelf);
+        }
 
     }
+
     private bool rangeCooldown = false;
     private Quaternion rotation;
     public GameObject castPoint;
     private Vector3 targetLocation;
     private void SpawnProjectile(GameObject actor, Vector3 castLocation)
+
     {
         targetLocation = castLocation - castPoint.transform.position;
         rotation = Quaternion.LookRotation(targetLocation, Vector3.up);
