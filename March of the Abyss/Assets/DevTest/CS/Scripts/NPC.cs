@@ -208,7 +208,9 @@ public class NPC : MonoBehaviour
                 }
                 else
                 {
-                   
+                    targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
                 }
 
             }
