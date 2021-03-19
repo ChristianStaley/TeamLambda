@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Slide : MonoBehaviour {
 	Image Filler;
-	public Slider slider;
+	//public Slider slider;
 
 	public string type;
 
@@ -20,7 +20,7 @@ public class Slide : MonoBehaviour {
 
 		if(type.Equals("mana"))
 		{
-			//Filler.fillAmount = GM.Mana / 100;
+			Filler.fillAmount = GM.Mana / 100;
 		}
 		else if (type.Equals("health"))
 		{
