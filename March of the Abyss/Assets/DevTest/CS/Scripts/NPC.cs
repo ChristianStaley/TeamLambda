@@ -77,10 +77,7 @@ public class NPC : MonoBehaviour
                         anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
                         anim.SetBool("Attack", false);
                     }
-                    else
-                    {
-                        Patrol();
-                    }
+                    Patrol();
                     StartSearch();
                     return;
                 }
@@ -211,7 +208,9 @@ public class NPC : MonoBehaviour
                 }
                 else
                 {
-                   
+                    targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
                 }
 
             }
@@ -316,7 +315,7 @@ public class NPC : MonoBehaviour
 
             // Move towards the WP
             cc_NPC.SimpleMove(fl_speed * transform.TransformDirection(Vector3.forward));
-
+            anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
             // if we get close move to WP target the next
             if (Vector3.Distance(gos_waypoints[in_next_wp].transform.position, transform.position) < 1)
             {
