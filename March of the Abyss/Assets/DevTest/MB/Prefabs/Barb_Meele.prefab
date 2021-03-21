@@ -441,7 +441,7 @@ MonoBehaviour:
   turnRate: 0
   maxHealth: 75
   gos_waypoints: []
-  fl_speed: 3
+  fl_speed: 2
   goldDropped: 0
   soulDropAmount: 75
 --- !u!114 &4366922888950838818

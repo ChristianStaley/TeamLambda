@@ -317,7 +317,7 @@ public class NPC : MonoBehaviour
             cc_NPC.SimpleMove(fl_speed * transform.TransformDirection(Vector3.forward));
             anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
             // if we get close move to WP target the next
-            if (Vector3.Distance(gos_waypoints[in_next_wp].transform.position, transform.position) < 1)
+            if (Vector3.Distance(gos_waypoints[in_next_wp].transform.position, transform.position) < 3)
             {
                 if (in_next_wp < gos_waypoints.Length - 1)
                     in_next_wp++;
