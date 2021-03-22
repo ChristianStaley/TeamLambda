@@ -33,7 +33,11 @@ public class PlayerMovement : MonoBehaviour
     public Collider colliderPlayer;
 
     public GameObject pauseMenuPanel;
-  
+
+    public GameObject Spell1UI;
+
+    private Abilities abilitiesUI;
+
 
     void Start()
     {
@@ -41,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+        abilitiesUI = Spell1UI.GetComponent<Abilities>();
+
     }
     
     IEnumerator RespawnDelay()
@@ -56,10 +62,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public GameObject spellUnlocked;
     void Update()
     {
 
-
+        if(GM.KillCount >= 10 && spellUnlocked != null)
+        {
+            GM.Spell2Active = true;
+            spellUnlocked.SetActive(true);
+            Destroy(spellUnlocked, 5f);
+        }
 
         if (GM.Health > 0)
         {
@@ -82,8 +94,8 @@ public class PlayerMovement : MonoBehaviour
             lastCooldown = Time.deltaTime;
             
         }
-
-        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha2) && !rangeCooldown)
+        
+        if (GM.Spell2Active && !previewEnabled && Input.GetKeyDown(KeyCode.Alpha2) && !rangeCooldown)
         {
 
             previewEnabled = true;
@@ -92,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (!previewEnabled && Input.GetKeyDown(KeyCode.Alpha3) && !rangeCooldown)
+        if (GM.Spell3Active && !previewEnabled && Input.GetKeyDown(KeyCode.Alpha3) && !rangeCooldown)
         {
 
             previewEnabled = true;
@@ -166,7 +178,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (!rangeCooldown)
         {
-            StartCoroutine(RangedAttackInterval());
+            if (GM.ChangeSpell == 0)
+            {
+                StartCoroutine(RangedAttackInterval());
+            }
+            else if (GM.ChangeSpell == 1)
+            {
+                StartCoroutine(RangedAttack2Interval());
+            }
+            else if (GM.ChangeSpell == 2)
+            {
+                StartCoroutine(RangedAttack3Interval());
+            }
+
         }
         
     }
@@ -176,7 +200,41 @@ public class PlayerMovement : MonoBehaviour
     GameObject newProjectileSpray;
     IEnumerator RangedAttackInterval()
     {
-        if (GM.Mana > 0 && GM.ChangeSpell != 0)
+        
+        if (GM.Mana > 0 && GM.ChangeSpell == 0)
+        {
+            animator.SetBool("Attack1", true);
+            agent.isStopped = true;
+            newProjectileSpray = Instantiate(GM.spell, castPoint.transform.position + new Vector3(0, 1, 0), rotation);
+            Physics.IgnoreCollision(newProjectileSpray.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            newProjectileSpray.GetComponent<ParticleSystem>().Play();
+            abilitiesUI.Ability1();
+            GM.Mana = -40;
+
+            rangeCooldown = true;
+
+
+            
+        }
+        yield return new WaitForSeconds(1f);
+        agent.isStopped = false;
+        animator.SetBool("Attack1", false);
+        if (GM.ChangeSpell == 0 && newProjectileSpray != null)
+        {
+            newProjectileSpray.GetComponent<ParticleSystem>().Stop();
+
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        
+        rangeCooldown = false;
+
+    }
+
+    IEnumerator RangedAttack2Interval()
+    {
+        if (GM.Mana > 0 && GM.ChangeSpell == 1)
         {
             animator.SetBool("Attack1", true);
             agent.isStopped = true;
@@ -184,42 +242,54 @@ public class PlayerMovement : MonoBehaviour
             agent.isStopped = false;
             newProjectile = Instantiate(GM.spell, castPoint.transform.position + new Vector3(0, 1, 0), rotation);
             Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
-            GM.Mana = -20;
+            abilitiesUI.Ability2();
+            GM.Mana = -30;
 
+            animator.SetBool("Attack1", false);
             rangeCooldown = true;
+
         }
 
-        else if (GM.Mana > 0 && GM.ChangeSpell == 0)
-        {
-            animator.SetBool("Attack1", true);
-            agent.isStopped = true;
-            newProjectileSpray = Instantiate(GM.spell, castPoint.transform.position + new Vector3(0, 1, 0), rotation);
-            Physics.IgnoreCollision(newProjectileSpray.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
-            newProjectileSpray.GetComponent<ParticleSystem>().Play();
-            GM.Mana = -20;
-
-            rangeCooldown = true;
-        }
-
-
-
-        yield return new WaitForSeconds(1f);
-
-        if (GM.ChangeSpell == 0 && newProjectileSpray != null)
-        {
-            newProjectileSpray.GetComponent<ParticleSystem>().Stop();
-           
-        }
         agent.isStopped = false;
+        yield return new WaitForSeconds(2f);
+
+        
         rangeCooldown = false;
 
     }
 
+    IEnumerator RangedAttack3Interval()
+    {
 
-    private void SetMovePosition()
+        if (GM.Mana > 0 && GM.ChangeSpell == 2)
+        {
+            animator.SetBool("Attack1", true);
+            agent.isStopped = true;
+            yield return new WaitForSeconds(0.2f);
+            agent.isStopped = false;
+            newProjectile = Instantiate(GM.spell, castPoint.transform.position + new Vector3(0, 1, 0), rotation);
+            Physics.IgnoreCollision(newProjectile.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            abilitiesUI.Ability3();
+            GM.Mana = -20;
+
+            rangeCooldown = true;
+            agent.isStopped = false;
+            animator.SetBool("Attack1", false);
+            yield return new WaitForSeconds(1f);
+            
+            rangeCooldown = false;
+            
+        }
+    }
+
+
+
+
+        private void SetMovePosition()
     {
         RaycastHit hit;
 
+        
         if (Input.GetMouseButtonDown(0))
         {
 

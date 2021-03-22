@@ -333,18 +333,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   maxDistance: 10
-  minDistance: 2
+  minDistance: 3
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
   currentState: 0
   searchTime: 100
   moveSpeed: 6
-  attackRange: 2
+  attackRange: 3
   targetMask:
     serializedVersion: 2
     m_Bits: 0
   projectile: {fileID: 2089706992297949151, guid: 4f870b34d4a195441900dc695ec8c003, type: 3}
   turnRate: 0
+  isMelee: 1
   maxHealth: 75
   gos_waypoints: []
   fl_speed: 1.5

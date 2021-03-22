@@ -56,7 +56,20 @@ public class PlayerHealth : MonoBehaviour
 
     public void Damage(int damage)
     {
-        GM.Health = -damage;
+        if (!invincible)
+        {
+            GM.Health = -damage;
+            StartCoroutine(DamageDelay());
+        }
+    }
+
+    private bool invincible = false;
+    IEnumerator DamageDelay()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(0.05f);
+        invincible = false;
+
     }
 
 }

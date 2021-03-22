@@ -440,6 +440,7 @@ MonoBehaviour:
     m_Bits: 0
   projectile: {fileID: 2089706992297949151, guid: 4f870b34d4a195441900dc695ec8c003, type: 3}
   turnRate: 0
+  isMelee: 1
   maxHealth: 75
   gos_waypoints: []
   fl_speed: 2

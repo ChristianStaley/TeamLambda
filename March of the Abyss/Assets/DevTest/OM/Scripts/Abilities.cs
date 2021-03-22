@@ -34,75 +34,119 @@ public class Abilities : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ability1();
-        Ability2();
-        Ability3();
-    }
-
-
-    void Ability1()
-    {
-        if (Input.GetKey(ability1) && isCooldown == false)
+        
+        if (abilityImage1.fillAmount <= 0)
         {
-            isCooldown = true;
-            abilityImage1.fillAmount = 1;
-
+            abilityImage1.fillAmount = 0;
+            isCooldown = false;
         }
-
-        if (isCooldown)
+        else
         {
             abilityImage1.fillAmount -= 1 / cooldown1 * Time.deltaTime;
-
-            if (abilityImage1.fillAmount <= 0)
-            {
-                abilityImage1.fillAmount = 0;
-                isCooldown = false;
-            }
         }
 
+        
+        if (abilityImage2.fillAmount <= 0)
+        {
+            abilityImage2.fillAmount = 0;
+            isCooldown = false;
+        }
+        else
+        {
+            abilityImage2.fillAmount -= 1 / cooldown1 * Time.deltaTime;
+        }
+
+        
+        if (abilityImage3.fillAmount <= 0)
+        {
+            abilityImage3.fillAmount = 0;
+            isCooldown = false;
+        }
+        else
+        {
+            abilityImage3.fillAmount -= 1 / cooldown1 * Time.deltaTime;
+        }
     }
 
-    void Ability2()
+
+    public void Ability1()
     {
-        if (Input.GetKey(ability2) && isCooldown2 == false)
-        {
-            isCooldown2 = true;
-            abilityImage2.fillAmount = 1;
-
-        }
-
-        if (isCooldown2)
-        {
-            abilityImage2.fillAmount -= 1 / cooldown2 * Time.deltaTime;
-
-            if (abilityImage2.fillAmount <= 0)
-            {
-                abilityImage2.fillAmount = 0;
-                isCooldown2 = false;
-            }
-        }
-
+        abilityImage1.fillAmount = 1;
     }
 
-    void Ability3()
+    public void Ability2()
     {
-        if (Input.GetKey(ability3) && isCooldown3 == false)
-        {
-            isCooldown3 = true;
-            abilityImage3.fillAmount = 1;
-
-        }
-
-        if (isCooldown3)
-        {
-            abilityImage3.fillAmount -= 1 / cooldown3 * Time.deltaTime;
-
-            if (abilityImage3.fillAmount <= 0)
-            {
-                abilityImage3.fillAmount = 0;
-                isCooldown3 = false;
-            }
-        }
-
+        abilityImage2.fillAmount = 1;
     }
+
+    public void Ability3()
+    {
+        abilityImage3.fillAmount = 1;
+    }
+
+    //void Ability1()
+    //{
+    //    if (Input.GetKey(ability1) && isCooldown == false)
+    //    {
+    //        isCooldown = true;
+    //        abilityImage1.fillAmount = 1;
+
+    //    }
+
+    //    if (isCooldown)
+    //    {
+    //        abilityImage1.fillAmount -= 1 / cooldown1 * Time.deltaTime;
+
+    //        if (abilityImage1.fillAmount <= 0)
+    //        {
+    //            abilityImage1.fillAmount = 0;
+    //            isCooldown = false;
+    //        }
+    //    }
+
+    //}
+
+    //void Ability2()
+    //{
+    //    if (Input.GetKey(ability2) && isCooldown2 == false)
+    //    {
+    //        isCooldown2 = true;
+    //        abilityImage2.fillAmount = 1;
+
+    //    }
+
+    //    if (isCooldown2)
+    //    {
+    //        abilityImage2.fillAmount -= 1 / cooldown2 * Time.deltaTime;
+
+    //        if (abilityImage2.fillAmount <= 0)
+    //        {
+    //            abilityImage2.fillAmount = 0;
+    //            isCooldown2 = false;
+    //        }
+    //    }
+
+    //}
+
+    //void Ability3()
+    //{
+    //    if (Input.GetKey(ability3) && isCooldown3 == false)
+    //    {
+    //        isCooldown3 = true;
+    //        abilityImage3.fillAmount = 1;
+
+    //    }
+
+    //    if (isCooldown3)
+    //    {
+    //        abilityImage3.fillAmount -= 1 / cooldown3 * Time.deltaTime;
+
+    //        if (abilityImage3.fillAmount <= 0)
+    //        {
+    //            abilityImage3.fillAmount = 0;
+    //            isCooldown3 = false;
+    //        }
+    //    }
+
+    //}
 }
