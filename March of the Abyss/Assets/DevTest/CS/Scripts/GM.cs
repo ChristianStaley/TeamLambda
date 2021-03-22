@@ -149,11 +149,37 @@ public class GM : MonoBehaviour
         }
     }
 
+    private bool spell2Active = false;
+    public static bool Spell2Active
+    {
+        get
+        {
+            return mSingleton.spell2Active;
+        }
+        set
+        {
+            mSingleton.spell2Active = value;
+        }
+    }
+
+    private bool spell3Active = false;
+    public static bool Spell3Active
+    {
+        get
+        {
+            return mSingleton.spell3Active;
+        }
+        set
+        {
+            mSingleton.spell3Active = value;
+        }
+    }
+
     #endregion
 
     #region Health
 
-
+    private float maxHealth = 100;
     public float currentHealth = 100;
     static public float Health
     {
@@ -178,11 +204,26 @@ public class GM : MonoBehaviour
 
     }
 
+    static public float MaxHealth
+    {
+        get
+        {
+            return mSingleton.maxHealth;
+        }
+        set
+        {
+            mSingleton.maxHealth += value;
+        }
+    }
+
+
+
     #endregion
 
     #region Mana
 
-
+    private float regenManaAmount = 20;
+    private float maxMana = 100;
     private bool canRegenMana = true;
     private float regenCooldown = 2f;
     public float currentMana = 100;
@@ -211,6 +252,41 @@ public class GM : MonoBehaviour
 
     }
 
+    static public float ManaRegen
+    {
+        get
+        {
+            return mSingleton.regenManaAmount;
+        }
+        set
+        {
+            mSingleton.regenManaAmount = value;
+        }
+    }
+
+    static public float ManaMax
+    {
+        get
+        {
+            return mSingleton.maxMana;
+        }
+        set
+        {
+            mSingleton.maxMana = value;
+        }
+    }
+
+
+            public void ManaRegenUpgrade(int value)
+    {
+        regenManaAmount += value;
+    }
+
+    public void ManaMaxUpgrade(int value)
+    {
+        maxMana += value;
+    }
+
 
     private void RegenMana()
     {
@@ -220,7 +296,7 @@ public class GM : MonoBehaviour
         }
         else
         {
-            GM.mSingleton.currentMana += 20;
+            GM.mSingleton.currentMana += regenManaAmount;
             regenCooldown = 2f;
         }
             
@@ -263,7 +339,34 @@ public class GM : MonoBehaviour
 
     }
 
+    private bool isUIActive = false;
+    public static bool UIActive
+    {
+        get
+        {
+            return mSingleton.isUIActive;
+        }
+        set
+        {
+            mSingleton.isUIActive = value;
+        }
+    }
+
+
     #endregion
+
+    private int currentKills;
+    public static int KillCount
+    {
+        get
+        {
+            return mSingleton.currentKills;
+        }
+        set
+        {
+            mSingleton.currentKills += value;
+        }
+    }
 
     #region GameStates
 
@@ -487,18 +590,18 @@ public class GM : MonoBehaviour
 
         }
 
-        if (mSingleton.currentMana > 100)
+        if (mSingleton.currentMana > maxMana)
         {
-            mSingleton.currentMana = 100;
+            mSingleton.currentMana = maxMana;
         }
 
 
-        if(regenCooldown <= 0 && mSingleton.currentMana < 100)
+        if(regenCooldown <= 0 && mSingleton.currentMana < maxMana)
         {
 
             RegenMana();
         }
-        else if(regenCooldown > 0 && mSingleton.currentMana < 100)
+        else if(regenCooldown > 0 && mSingleton.currentMana < maxMana)
         {
             regenCooldown -= Time.deltaTime;
         }
