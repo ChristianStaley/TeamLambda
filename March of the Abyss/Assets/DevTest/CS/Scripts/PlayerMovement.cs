@@ -63,14 +63,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public GameObject spellUnlocked;
+    public GameObject spell2Unlocked;
     void Update()
     {
 
-        if(GM.KillCount >= 10 && spellUnlocked != null)
+        if(GM.KillCount >= 5 && spellUnlocked != null)
         {
             GM.Spell2Active = true;
             spellUnlocked.SetActive(true);
             Destroy(spellUnlocked, 5f);
+        }
+
+        if(GM.KillCount >= 15 && spell2Unlocked != null)
+        {
+            GM.Spell3Active = true;
+            spell2Unlocked.SetActive(true);
+            Destroy(spell2Unlocked, 5f);
         }
 
         if (GM.Health > 0)
@@ -161,6 +169,14 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Escape)))
         {
+            if (GM.UIActive)
+            {
+                GM.UIActive = false;
+            }
+            else
+            {
+                GM.UIActive = true;
+            }
             pauseMenuPanel.gameObject.SetActive(!pauseMenuPanel.gameObject.activeSelf);
         }
 
@@ -290,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
 
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !GM.UIActive)
         {
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
@@ -314,7 +330,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && !GM.UIActive)
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
             {
@@ -332,7 +348,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && !previewEnabled)
+        if (Input.GetMouseButtonDown(1) && !previewEnabled && !GM.UIActive)
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
