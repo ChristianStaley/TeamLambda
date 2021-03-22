@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 4366922888950838818}
   - component: {fileID: 4606971622049972680}
   - component: {fileID: 7772758309763175741}
+  - component: {fileID: 8827806837281143433}
   m_Layer: 10
   m_Name: Barb_Meele
   m_TagString: Untagged
@@ -439,9 +440,10 @@ MonoBehaviour:
     m_Bits: 0
   projectile: {fileID: 2089706992297949151, guid: 4f870b34d4a195441900dc695ec8c003, type: 3}
   turnRate: 0
+  isMelee: 1
   maxHealth: 75
   gos_waypoints: []
-  fl_speed: 3
+  fl_speed: 2
   goldDropped: 0
   soulDropAmount: 75
 --- !u!114 &4366922888950838818
@@ -495,6 +497,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!143 &8827806837281143433
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935216556557641507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7772758309876153575
 PrefabInstance:
   m_ObjectHideFlags: 0

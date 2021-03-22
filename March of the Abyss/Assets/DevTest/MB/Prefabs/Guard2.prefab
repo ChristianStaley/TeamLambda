@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 4361113079793746504}
   - component: {fileID: 7291960984418070139}
   - component: {fileID: 4607433444096308642}
+  - component: {fileID: 5224508027719458646}
   m_Layer: 10
   m_Name: Guard2
   m_TagString: Untagged
@@ -332,21 +333,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   maxDistance: 10
-  minDistance: 2
+  minDistance: 3
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
   currentState: 0
   searchTime: 100
   moveSpeed: 6
-  attackRange: 2
+  attackRange: 3
   targetMask:
     serializedVersion: 2
     m_Bits: 0
   projectile: {fileID: 2089706992297949151, guid: 4f870b34d4a195441900dc695ec8c003, type: 3}
   turnRate: 0
+  isMelee: 1
   maxHealth: 75
   gos_waypoints: []
-  fl_speed: 3
+  fl_speed: 1.5
   goldDropped: 0
   soulDropAmount: 75
 --- !u!114 &4361113079793746504
@@ -400,6 +402,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!143 &5224508027719458646
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926380888180380489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7926380888562584836
 GameObject:
   m_ObjectHideFlags: 0
