@@ -20,7 +20,7 @@ public class NPCFriendly : NPC
         base.Update();
         if (anim != null)
         {
-            anim.SetFloat("speed", 1);
+            //anim.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
         }
     }
 

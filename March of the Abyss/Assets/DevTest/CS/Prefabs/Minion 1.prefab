@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3452857901103323422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8392553042586222565}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   maxDistance: 16
-  minDistance: 3
+  minDistance: 5
   ignorePlayer: 0
   deadBody: {fileID: 0}
   currentState: 0
@@ -181,7 +181,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3452857901103323422}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 91978ef156c9ee3459aef7c9e70af32e, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 20f5c77881a163a4eac2ac95586ea8e5, type: 3}
   m_Controller: {fileID: 9100000, guid: 67e1103dd28ce164a9ebe141aaa36563, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -410,7 +410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 91978ef156c9ee3459aef7c9e70af32e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 91978ef156c9ee3459aef7c9e70af32e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -452,7 +452,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: jill@Injured Idle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5866666021909216657, guid: 91978ef156c9ee3459aef7c9e70af32e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 91978ef156c9ee3459aef7c9e70af32e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 91978ef156c9ee3459aef7c9e70af32e, type: 3}
 --- !u!4 &7170765974744407611 stripped
 Transform:
