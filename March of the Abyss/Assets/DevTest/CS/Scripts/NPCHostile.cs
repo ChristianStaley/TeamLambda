@@ -42,6 +42,7 @@ public class NPCHostile : NPC
     {
         GM.Souls = soulDropAmount;
         GM.Gold = goldDropped;
+        GM.KillCount = 1;
         base.DoKill();
     }
 
@@ -69,7 +70,7 @@ public class NPCHostile : NPC
     IEnumerator DamageDelay()
     {
         invicible = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         invicible = false;
 
     }

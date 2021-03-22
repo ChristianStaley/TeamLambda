@@ -180,13 +180,29 @@ public class NPC : MonoBehaviour
     public float turnRate;
     Quaternion targetRotation;
     float str;
+    [SerializeField]
+    protected bool isMelee;
 
 
     protected virtual void AttackTarget()
     {
         if (target != null)
         {
-            if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+            targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            str = Mathf.Min(turnRate * Time.deltaTime, 1);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+
+            if (isMelee)
+            {
+
+                if (performMeleeAttack && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+                {
+                    anim.SetBool("Attack", true);
+                    StartCoroutine(MeleeAttackInterval());
+                }
+                
+            }
+            else if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
             {
 
                 targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
@@ -211,6 +227,7 @@ public class NPC : MonoBehaviour
                     targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
                     str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+                    anim.SetBool("Attack", false);
                 }
 
             }
@@ -232,6 +249,27 @@ public class NPC : MonoBehaviour
         
     }
 
+
+    private bool performMeleeAttack = true;
+    IEnumerator MeleeAttackInterval()
+    {
+        anim.SetBool("isAttack", true);
+        performMeleeAttack = false;
+
+        yield return new WaitForSeconds(1f);
+
+        if (target != null)
+        {
+            target.SendMessage("Damage", 5, SendMessageOptions.DontRequireReceiver);
+        }
+
+        performMeleeAttack = true;
+        if (target == null)
+        {
+            anim.SetBool("isAttack", false);
+            performMeleeAttack = true;
+        }
+    }
 
     #endregion
 
