@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BossManager : MonoBehaviour
 {
     public GameObject Phase2;
+    public GameObject Phase2Text;
     public GameObject Phase2End;
 
 
@@ -97,7 +98,7 @@ public class BossManager : MonoBehaviour
 
             case GameStates.Phase2:
 
-                //Spawn();
+                Phase2Text.SetActive(true);
                 Phase2.SetActive(true);
                 return GameStates.Playing;
             case GameStates.Phase3:
