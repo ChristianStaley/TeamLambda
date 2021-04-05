@@ -19218,7 +19218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickToLoad: 0
-  nextScene: 
+  nextScene: LevelDesign
 --- !u!1 &1059209101
 GameObject:
   m_ObjectHideFlags: 0
