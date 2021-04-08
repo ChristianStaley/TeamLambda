@@ -20,7 +20,7 @@ public class DisableObjectOnTrigger : MonoBehaviour
     {
         if (Player.tag == "Player")
         {
-            Destroy(gameObject, 5);
+            Destroy(gameObject, 1);
         }
 
     }
