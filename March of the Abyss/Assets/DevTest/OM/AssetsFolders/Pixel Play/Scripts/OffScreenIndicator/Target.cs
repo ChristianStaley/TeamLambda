@@ -101,4 +101,13 @@ public class Target : MonoBehaviour
         float distanceFromCamera = Vector3.Distance(cameraPosition, transform.position);
         return distanceFromCamera;
     }
+
+    private void OnTriggerEnter(Collider Player)
+    {
+        if (Player.tag == "Player")
+        {
+            Destroy(gameObject, 1);
+        }
+
+    }
 }
