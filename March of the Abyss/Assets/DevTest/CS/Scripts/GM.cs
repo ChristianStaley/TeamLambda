@@ -212,10 +212,22 @@ public class GM : MonoBehaviour
         }
         set
         {
-            mSingleton.maxHealth += value;
+            mSingleton.maxHealth = value;
         }
     }
 
+
+
+    #endregion
+
+    #region Upgrades
+
+    //Attack Speed Bonus
+
+
+    //Damage Bonus
+
+    //Range Bonus
 
 
     #endregion
