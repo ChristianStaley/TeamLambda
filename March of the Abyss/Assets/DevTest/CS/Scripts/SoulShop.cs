@@ -30,7 +30,7 @@ public class SoulShop : MonoBehaviour
         if (GM.Souls >= upgrade1Cost)
         {
             GM.MaxHealth += 20;
-            GM.Souls -= upgrade1Cost;
+            GM.Souls = -upgrade1Cost;
         }
     }
 
@@ -39,7 +39,7 @@ public class SoulShop : MonoBehaviour
         if (GM.Souls >= upgrade2Cost)
         {
             GM.ManaMax += 20;
-            GM.Souls -= upgrade2Cost;
+            GM.Souls = -upgrade2Cost;
         }
     }
 
@@ -48,7 +48,7 @@ public class SoulShop : MonoBehaviour
         if (GM.Souls >= upgrade3Cost)
         {
             GM.ManaRegen += 20;
-            GM.Souls -= upgrade3Cost;
+            GM.Souls = -upgrade3Cost;
         }
     }
 
