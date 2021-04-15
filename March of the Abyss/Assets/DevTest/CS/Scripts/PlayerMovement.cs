@@ -67,14 +67,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if(GM.KillCount >= 5 && spellUnlocked != null)
+        if(GM.KillCount >= 10 && spellUnlocked != null)
         {
             GM.Spell2Active = true;
             spellUnlocked.SetActive(true);
             Destroy(spellUnlocked, 5f);
         }
 
-        if(GM.KillCount >= 15 && spell2Unlocked != null)
+        if(GM.KillCount >= 25 && spell2Unlocked != null)
         {
             GM.Spell3Active = true;
             spell2Unlocked.SetActive(true);
@@ -371,7 +371,7 @@ public class PlayerMovement : MonoBehaviour
         {
             FaceTarget(target);
 
-            if(Vector3.Distance(transform.position, target.transform.position) <= 2)
+            if(Vector3.Distance(transform.position, target.transform.position) <= 3.5)
             {
                 if (performMeleeAttack)
                 {
