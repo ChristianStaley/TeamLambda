@@ -16,6 +16,7 @@ public class SoulShop : MonoBehaviour
     void Start()
     {
         cl = GetComponent<Collider>();
+        shopUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,8 +63,10 @@ public class SoulShop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GM.UIActive = true;
-        shopUI.SetActive(true);
+
+            GM.UIActive = true;
+            shopUI.SetActive(true);
+        
     }
 
     private void OnTriggerExit(Collider other)
