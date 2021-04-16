@@ -349,8 +349,8 @@ MonoBehaviour:
   maxHealth: 75
   gos_waypoints: []
   fl_speed: 1.5
-  goldDropped: 0
-  soulDropAmount: 75
+  goldDropped: 2
+  soulDropAmount: 20
 --- !u!114 &4361113079793746504
 MonoBehaviour:
   m_ObjectHideFlags: 0
