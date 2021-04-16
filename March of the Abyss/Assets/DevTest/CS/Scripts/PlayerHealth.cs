@@ -10,7 +10,8 @@ public class PlayerHealth : MonoBehaviour
     private Animator animPlayer;
     private PlayerMovement pmPlayer;
     private NavMeshAgent agent;
-    
+    public int healCost = 100;
+    public int healAmount = 20;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,12 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         CheckHealth();
+
+        if (Input.GetKeyDown(KeyCode.H) && GM.Souls >= healCost)
+        {
+            GM.Souls = -healCost;
+            GM.Health += healAmount;
+        }
     }
 
 
