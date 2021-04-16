@@ -18,6 +18,7 @@ public class GoldShop : MonoBehaviour
     void Start()
     {
         cl = GetComponent<Collider>();
+        shopUI.SetActive(false);
     }
 
     // Update is called once per frame
