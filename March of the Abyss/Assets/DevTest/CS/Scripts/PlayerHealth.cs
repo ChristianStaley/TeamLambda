@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator animPlayer;
     private PlayerMovement pmPlayer;
     private NavMeshAgent agent;
-    public int healCost = 100;
+    public int healCost = 50;
     public int healAmount = 20;
     
     // Start is called before the first frame update
@@ -40,6 +40,10 @@ public class PlayerHealth : MonoBehaviour
         if (GM.Health <= 0)
         {
             KillPlayer();
+        }
+        else if(GM.Health > GM.MaxHealth)
+        {
+            GM.Health = GM.MaxHealth;
         }
     }
 

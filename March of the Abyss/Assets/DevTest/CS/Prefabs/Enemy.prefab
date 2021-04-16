@@ -195,9 +195,12 @@ MonoBehaviour:
     m_Bits: 0
   projectile: {fileID: 612243436323064019, guid: 5881b3514a6c68e4d8042e50b66ba8ea, type: 3}
   turnRate: 30
+  isMelee: 0
   maxHealth: 75
-  goldDropped: 0
-  soulDropAmount: 75
+  gos_waypoints: []
+  fl_speed: 3
+  goldDropped: 5
+  soulDropAmount: 10
 --- !u!114 &1432661669
 MonoBehaviour:
   m_ObjectHideFlags: 0

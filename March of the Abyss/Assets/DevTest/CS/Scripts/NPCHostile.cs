@@ -15,7 +15,7 @@ public class NPCHostile : NPC
     {
         base.Start();
         targetMask = LayerMask.GetMask("Minion", "Player");
-        goldDropped = Random.Range(5,10) * 10;
+        //goldDropped = Random.Range(5,10) * 10;
 
     }
 
@@ -29,19 +29,12 @@ public class NPCHostile : NPC
     protected override void TargetDistance()
     {
         base.TargetDistance();
-        //if (currentDistance < minDistance)
-        //{
-        //    agent.isStopped = true;
-        //    currentState = NPCState.ATTACK;
-        //}
-        //else
-        //    agent.isStopped = false;
     }
 
     protected override void DoKill()
     {
-        GM.Souls = soulDropAmount;
-        GM.Gold = goldDropped;
+        GM.Souls += soulDropAmount;
+        GM.Gold += goldDropped;
         GM.KillCount = 1;
         base.DoKill();
     }

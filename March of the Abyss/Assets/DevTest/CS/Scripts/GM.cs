@@ -94,7 +94,7 @@ public class GM : MonoBehaviour
 
     #region Souls
 
-    int currentSouls = 150;
+    int currentSouls = 0;
     static public int Souls
     {
         get
@@ -109,7 +109,7 @@ public class GM : MonoBehaviour
             }
             else
             {
-                mSingleton.currentSouls += value;
+                mSingleton.currentSouls = value;
             }
             
         }
@@ -318,7 +318,7 @@ public class GM : MonoBehaviour
 
     #region Gold
 
-    private int currentGold = 100;
+    private int currentGold = 0;
 
     public static int Gold
     {
@@ -618,6 +618,7 @@ public class GM : MonoBehaviour
             regenCooldown -= Time.deltaTime;
         }
 
+        
 
         if(currentHealth<= 0)
         {
