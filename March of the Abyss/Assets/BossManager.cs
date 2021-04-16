@@ -79,7 +79,7 @@ public class BossManager : MonoBehaviour
 
     public GameStates EnterState(GameStates vState)
     {
-        Debug.LogFormat("Enter State {0}", vState);
+        //Debug.LogFormat("Enter State {0}", vState);
         switch (vState)
         {
               //Also trigger new state on exit
