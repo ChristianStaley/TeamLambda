@@ -120,7 +120,7 @@ public class NPCFriendly : NPC
 
     public void Damage(int damage)
     {
-        currentHealth -= damage;
+        //currentHealth -= damage;
         currentState = NPCState.ATTACK;
         StartSearch();
     }
