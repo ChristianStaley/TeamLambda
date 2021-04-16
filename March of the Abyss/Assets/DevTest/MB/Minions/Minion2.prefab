@@ -238,6 +238,7 @@ MonoBehaviour:
   minDistance: 5
   ignorePlayer: 0
   deadBody: {fileID: 0}
+  npcHealth: {fileID: 6702187433316067354}
   currentState: 0
   searchTime: 100
   moveSpeed: 8
@@ -248,7 +249,6 @@ MonoBehaviour:
   projectile: {fileID: 2089706992297949151, guid: 4f870b34d4a195441900dc695ec8c003, type: 3}
   turnRate: 0
   isMelee: 0
-  maxHealth: 25
   gos_waypoints: []
   fl_speed: 3
 --- !u!114 &6702187433316067354
