@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0)) // changed
             {
                 
 
@@ -306,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
 
         
-        if (Input.GetMouseButtonDown(0) && !GM.UIActive)
+        if (Input.GetMouseButtonDown(1) && !GM.UIActive) //Changed
         {
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
@@ -330,7 +330,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
-        else if (Input.GetMouseButton(0) && !GM.UIActive)
+        else if (Input.GetMouseButton(1) && !GM.UIActive) //changed
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
             {
@@ -348,7 +348,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && !previewEnabled && !GM.UIActive)
+        if (Input.GetMouseButtonDown(0) && !previewEnabled && !GM.UIActive) //Changed
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
@@ -381,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
                 
                 animator.SetBool("isAttack", true);
 
-                if (!Input.GetMouseButton(0))
+                if (!Input.GetMouseButton(1)) //changed
                 {
                     agent.ResetPath();
 
