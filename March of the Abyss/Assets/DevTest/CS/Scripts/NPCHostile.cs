@@ -47,7 +47,7 @@ public class NPCHostile : NPC
         if (!invicible)
         {
             
-            currentHealth -= damage;
+            //currentHealth -= damage;
             StartCoroutine(DamageDelay());
             
         }
