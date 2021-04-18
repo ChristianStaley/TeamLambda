@@ -27101,6 +27101,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5812354633572709372, guid: d44756e759d7b084ea98b6dc85bf8e14, type: 3}
+      propertyPath: healCost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812354633572709372, guid: d44756e759d7b084ea98b6dc85bf8e14, type: 3}
+      propertyPath: healAmount
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7218181792669624922, guid: d44756e759d7b084ea98b6dc85bf8e14, type: 3}
       propertyPath: m_Name
       value: Player
