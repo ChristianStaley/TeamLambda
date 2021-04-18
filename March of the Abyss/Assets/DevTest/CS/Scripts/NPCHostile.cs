@@ -43,7 +43,6 @@ public class NPCHostile : NPC
 
     public void Damage(int damage)
     {
-        Debug.Log("Invincible: " + invicible);
         if (!invicible)
         {
             

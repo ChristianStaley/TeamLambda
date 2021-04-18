@@ -116,9 +116,9 @@ public class NPCFriendly : NPC
 
     }
 
+    
 
-
-    public void Damage(int damage)
+    public void MinionDamage(int damage)
     {
         //currentHealth -= damage;
         currentState = NPCState.ATTACK;

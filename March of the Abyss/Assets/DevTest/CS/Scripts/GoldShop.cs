@@ -8,8 +8,24 @@ public class GoldShop : MonoBehaviour
 
     public GameObject shopUI;
     public int upgrade1Cost;
+    public float rangeIncrease;
     public int upgrade2Cost;
+    public float damageIncrease;
     public int upgrade3Cost;
+    public float attackSpeedIncrease;
+
+    [Header("Item 1")]
+    public GameObject item1Text;
+    public GameObject item1Button;
+
+    [Header("Item 2")]
+    public GameObject item2Text;
+    public GameObject item2Button;
+
+    [Header("Item 3")]
+    public GameObject item3Text;
+    public GameObject item3Button;
+
 
     private Collider cl;
     
@@ -33,6 +49,9 @@ public class GoldShop : MonoBehaviour
         if(GM.Gold >= upgrade1Cost)
         {
             GM.Gold -= upgrade1Cost;
+            GM.AttackRange += rangeIncrease;
+            item1Button.SetActive(false);
+            item1Text.SetActive(true);
         }
     }
 
@@ -41,6 +60,9 @@ public class GoldShop : MonoBehaviour
         if (GM.Gold >= upgrade2Cost)
         {
             GM.Gold -= upgrade2Cost;
+            GM.AttackDamage += damageIncrease;
+            item2Button.SetActive(false);
+            item2Text.SetActive(true);
         }
     }
 
@@ -49,6 +71,9 @@ public class GoldShop : MonoBehaviour
         if (GM.Gold >= upgrade3Cost)
         {
             GM.Gold -= upgrade3Cost;
+            GM.AttackSpeed -= attackSpeedIncrease;
+            item3Button.SetActive(false);
+            item3Text.SetActive(true);
         }
     }
 
