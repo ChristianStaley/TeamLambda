@@ -270,6 +270,7 @@ MonoBehaviour:
   fl_HP: 100
   fl_max_HP: 100
   go_hit_text: {fileID: 3422733249172635069, guid: 0fab0d53687a2c5408bb56f36ddb8814, type: 3}
+  isMinion: 0
   anim: {fileID: 0}
 --- !u!95 &4376245610037865144
 Animator:
@@ -524,7 +525,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a53991fd66320774cb96b0acf70bcd01, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00055695
+      value: 0.001373291
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a53991fd66320774cb96b0acf70bcd01, type: 3}
       propertyPath: m_LocalPosition.y
@@ -532,7 +533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a53991fd66320774cb96b0acf70bcd01, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0038834
+      value: 0.0037765503
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a53991fd66320774cb96b0acf70bcd01, type: 3}
       propertyPath: m_LocalRotation.x
