@@ -371,12 +371,21 @@ public class PlayerMovement : MonoBehaviour
         {
             FaceTarget(target);
 
-            if(Vector3.Distance(transform.position, target.transform.position) <= 3.5)
+            if(Vector3.Distance(transform.position, target.transform.position) <= GM.AttackRange)
             {
                 if (performMeleeAttack)
                 {
-                    StartCoroutine(MeleeAttackInterval());
+                    if(target.GetComponent<NPCHealth>().fl_HP > 0)
+                    {
+                        StartCoroutine(MeleeAttackInterval());
+                    }
+                    else
+                    {
+                        target = null;
+                    }
+                    
                 }
+                
                     
                 
                 animator.SetBool("isAttack", true);
@@ -393,7 +402,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 
-                meleeAttack.Attack(colliderPlayer, gameObject);
+                //meleeAttack.Attack(colliderPlayer, gameObject);
             }
         }
         else
@@ -409,11 +418,11 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isAttack", true);
         performMeleeAttack = false;
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(GM.AttackSpeed);
 
         if(target != null)
         {
-            target.SendMessage("Damage", 20, SendMessageOptions.DontRequireReceiver);
+            target.SendMessage("Damage", GM.AttackDamage, SendMessageOptions.DontRequireReceiver);
         }
         
         performMeleeAttack = true;

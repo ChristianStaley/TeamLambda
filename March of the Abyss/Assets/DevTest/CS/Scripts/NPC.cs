@@ -95,6 +95,7 @@ public class NPC : MonoBehaviour
                         anim.SetBool("Attack", false);
                     }
                     MoveToPoint();
+                    
                     return;
                 }
 
@@ -264,6 +265,7 @@ public class NPC : MonoBehaviour
         if (target != null)
         {
             target.SendMessage("Damage", 5, SendMessageOptions.DontRequireReceiver);
+            target.SendMessage("MinionDamage", 5, SendMessageOptions.DontRequireReceiver);
         }
 
         performMeleeAttack = true;
@@ -279,14 +281,12 @@ public class NPC : MonoBehaviour
 
     #region Health
 
-    //[SerializeField]
-    //protected float maxHealth = 100;
-    //protected float currentHealth;
+
 
 
     protected virtual void CheckHealth()
     {
-        if(npcHealth.fl_HP <= 0)
+        if(npcHealth != null && npcHealth.fl_HP <= 0)
         {
             DoKill();
         }
@@ -294,22 +294,17 @@ public class NPC : MonoBehaviour
 
     protected virtual void DoKill()
     {
-        //Insert death anim
-        //Insert death effect
+        
         anim.SetBool("Dead", true);
         anim.SetBool("Attack", false);
         
 
         Instantiate(deadBody, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);      
-        Destroy(this.gameObject, 5f);
+        Destroy(this.gameObject, 2f);
         gameObject.GetComponent<NPCHealth>().enabled = false;
         this.enabled = false;
     }
 
-    //protected virtual float GetHealth()
-    //{
-    //    return currentHealth;
-    //}
 
 
     #endregion
@@ -319,7 +314,7 @@ public class NPC : MonoBehaviour
     {
 
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position, attackRange, transform.forward, out hit, targetMask))
+        if(Physics.SphereCast(transform.position, attackRange * 1.5f, transform.forward, out hit, targetMask))
         {
             rayHitDist = hit.distance;
             if(hit.transform.gameObject.layer == 9 || hit.transform.gameObject.layer == 13)
@@ -328,7 +323,7 @@ public class NPC : MonoBehaviour
                 currentState = NPCState.ATTACK;
             }
         }
-        if(Physics.SphereCast(transform.position, attackRange/2, -transform.forward, out hit, targetMask))
+        if(Physics.SphereCast(transform.position, attackRange, -transform.forward, out hit, targetMask))
         {
             rayHitDist = hit.distance;
             if (hit.transform.gameObject.layer == 9 || hit.transform.gameObject.layer == 13)

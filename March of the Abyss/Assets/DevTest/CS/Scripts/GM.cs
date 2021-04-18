@@ -94,6 +94,7 @@ public class GM : MonoBehaviour
 
     #region Souls
 
+    [SerializeField]
     int currentSouls = 0;
     static public int Souls
     {
@@ -222,13 +223,47 @@ public class GM : MonoBehaviour
 
     #region Upgrades
 
-    //Attack Speed Bonus
+    [SerializeField]
+    private float currentAttackSpeed;
+    public static float AttackSpeed
+    {
+        get
+        {
+            return mSingleton.currentAttackSpeed;
+        }
+        set
+        {
+            mSingleton.currentAttackSpeed = value;
+        }
+    }
 
+    [SerializeField]
+    private float currentAttackRange;
+    public static float AttackRange
+    {
+        get
+        {
+            return mSingleton.currentAttackRange;
+        }
+        set
+        {
+            mSingleton.currentAttackRange = value;
+        }
+    }
 
-    //Damage Bonus
-
-    //Range Bonus
-
+    [SerializeField]
+    private float currentAttackDamage;
+    public static float AttackDamage
+    {
+        get
+        {
+            return mSingleton.currentAttackDamage;
+        }
+        set
+        {
+            mSingleton.currentAttackDamage = value;
+        }
+    }
 
     #endregion
 
@@ -318,6 +353,7 @@ public class GM : MonoBehaviour
 
     #region Gold
 
+    [SerializeField]
     private int currentGold = 0;
 
     public static int Gold

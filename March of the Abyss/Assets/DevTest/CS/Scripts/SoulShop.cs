@@ -9,6 +9,20 @@ public class SoulShop : MonoBehaviour
     public int upgrade2Cost;
     public int upgrade3Cost;
 
+
+    [Header("Item 1")]
+    public GameObject item1Text;
+    public GameObject item1Button;
+
+    [Header("Item 2")]
+    public GameObject item2Text;
+    public GameObject item2Button;
+
+    [Header("Item 3")]
+    public GameObject item3Text;
+    public GameObject item3Button;
+
+
     private Collider cl;
 
 
@@ -32,6 +46,8 @@ public class SoulShop : MonoBehaviour
         {
             GM.MaxHealth += 20;
             GM.Souls = -upgrade1Cost;
+            item1Button.SetActive(false);
+            item1Text.SetActive(true);
         }
     }
 
@@ -41,6 +57,8 @@ public class SoulShop : MonoBehaviour
         {
             GM.ManaMax += 20;
             GM.Souls = -upgrade2Cost;
+            item2Button.SetActive(false);
+            item2Text.SetActive(true);
         }
     }
 
@@ -50,6 +68,8 @@ public class SoulShop : MonoBehaviour
         {
             GM.ManaRegen += 20;
             GM.Souls = -upgrade3Cost;
+            item3Button.SetActive(false);
+            item3Text.SetActive(true);
         }
     }
 
