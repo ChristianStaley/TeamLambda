@@ -437,6 +437,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isAttack", true);
         performMeleeAttack = false;
         
+        
         yield return new WaitForSeconds(GM.AttackSpeed);
 
         if(target != null)
