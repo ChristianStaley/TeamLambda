@@ -120,6 +120,7 @@ MonoBehaviour:
   constantDamage: 0
   constantAttackCooldown: 0.1
   duration: 0
+  damageMinion: 1
 --- !u!136 &6223467641850835304
 CapsuleCollider:
   m_ObjectHideFlags: 0
