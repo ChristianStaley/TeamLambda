@@ -78,13 +78,11 @@ public class GM : MonoBehaviour
     {
         get
         {
-            Debug.Log("Returning Transform: " + mSingleton.currentSpawnLocation);
             return mSingleton.currentSpawnLocation;
 
         }
         set 
         {
-            Debug.Log("Setting Transform: " + value);
             mSingleton.currentSpawnLocation = value;
         }
 

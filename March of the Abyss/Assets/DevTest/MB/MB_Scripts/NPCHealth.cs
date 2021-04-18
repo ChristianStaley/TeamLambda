@@ -65,6 +65,27 @@ public class NPCHealth : MonoBehaviour
 
     private bool invincible = false;
 
+    public void MinionDamge(float damage)
+    {
+        Debug.Log("Method Minion Damage Called");
+        if (!invincible && isMinion)
+        {
+            Debug.Log("Removed health");
+            fl_HP -= damage;
+            StartCoroutine(DamageDelay());
+            GameObject _GO_hit_text = Instantiate(go_hit_text, transform.position, Quaternion.identity, transform) as GameObject;
+            Vector3 dmgPos = Camera.main.WorldToScreenPoint(transform.position);
+            go_hit_text.transform.position = dmgPos;
+
+            // Create text mesh to show hit damage
+            _GO_hit_text.GetComponent<TextMeshPro>().text = damage.ToString();
+            _GO_hit_text.GetComponent<TextMeshPro>().color = Color.red;
+        }
+    }
+
+
+
+
     // ----------------------------------------------------------------------
     // Damage Receiver
     public void Damage(float _fl_damage)
@@ -90,21 +111,7 @@ public class NPCHealth : MonoBehaviour
 
     }//-----
 
-    public void MinionDamge(float damage)
-    {
-        if (isMinion)
-        {
-            fl_HP -= damage;
-            StartCoroutine(DamageDelay());
-            GameObject _GO_hit_text = Instantiate(go_hit_text, transform.position, Quaternion.identity, transform) as GameObject;
-            Vector3 dmgPos = Camera.main.WorldToScreenPoint(transform.position);
-            go_hit_text.transform.position = dmgPos;
 
-            // Create text mesh to show hit damage
-            _GO_hit_text.GetComponent<TextMeshPro>().text = damage.ToString();
-            _GO_hit_text.GetComponent<TextMeshPro>().color = Color.red;
-        }
-    }
     
 
     IEnumerator DamageDelay()
