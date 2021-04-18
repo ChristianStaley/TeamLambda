@@ -59,6 +59,14 @@ public class BossManager : MonoBehaviour
     void Update()
     {
         Speech();
+        if (HealthBarController.currenthp <= 0)
+        {
+            LastSpeech();
+            go_panel.SetActive(true);
+            animBoss.SetBool("Dead", true);
+            Dospawn=false;
+            
+        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             //Spawn();
@@ -74,6 +82,7 @@ public class BossManager : MonoBehaviour
 , Phase1
 , Phase2
 , Phase3
+            ,LstSpeech
 , GameOver
     }
     GameStates mCurrentState = GameStates.None;
@@ -105,6 +114,12 @@ public class BossManager : MonoBehaviour
                 return GameStates.Playing;
             case GameStates.Phase3:
 
+                //Spawn();
+                return GameStates.Playing;
+
+            case GameStates.LstSpeech:
+
+                Phase2Text.SetActive(false);
                 //Spawn();
                 return GameStates.Playing;
 
@@ -160,7 +175,8 @@ public class BossManager : MonoBehaviour
 
                         if (HealthBarController.currenthp <= 0)
                         {
-                            GameState = GameStates.GameOver;
+                            
+                            GameState = GameStates.LstSpeech;
                         }
                     }
                     break;
@@ -251,7 +267,7 @@ public class BossManager : MonoBehaviour
                 randomSpawn = Random.Range(0, spawnPoints.Length);
                 Instantiate(spawnablePrefab, spawnPoints[randomSpawn].position, Quaternion.identity);
 
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(10f);
             }
             yield return new WaitForSeconds(1f);
         } 
@@ -305,6 +321,40 @@ public class BossManager : MonoBehaviour
 
             // update the text box
             txt_window.text = st_message[in_message_stage];
+            //animBoss.SetTrigger("CombatIdle");
+            //txt_NPC.text = NPC_name;
+        }
+    }
+
+    public string[] lastst_message;
+    private int lastin_message_stage = 0;
+    void LastSpeech()
+    {
+        // Is the PC in trigger distance
+        if (Vector3.Distance(go_PC.transform.position, transform.position) < fl_distance)
+        {
+            // Enable the message panel active
+            if (!go_panel.activeInHierarchy) 
+
+
+
+            // Step through the messages if there are more than 1
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (lastst_message.Length > 1 && (lastin_message_stage < lastst_message.Length - 1))
+                    lastin_message_stage++;
+                else
+                {
+                    go_panel.SetActive(false);
+                    animBoss.SetBool("lDead",true);
+                        //GAME OVER SCENE
+                   
+                }
+
+            }
+
+            // update the text box
+            txt_window.text = lastst_message[lastin_message_stage];
             //animBoss.SetTrigger("CombatIdle");
             //txt_NPC.text = NPC_name;
         }
