@@ -101,7 +101,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.75
-  m_Height: 2
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &3452857901103323416
@@ -139,11 +139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  maxDistance: 16
+  maxDistance: 10
   minDistance: 5
   ignorePlayer: 0
   deadBody: {fileID: 0}
-  npcHealth: {fileID: 0}
+  npcHealth: {fileID: -7159060592313294444}
   currentState: 0
   searchTime: 100
   moveSpeed: 8
@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b1463ad57cead4d8a1c60b62c6a243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fl_HP: 25
-  fl_max_HP: 25
+  fl_HP: 15
+  fl_max_HP: 15
   go_hit_text: {fileID: 3422733249172635069, guid: 0fab0d53687a2c5408bb56f36ddb8814, type: 3}
   isMinion: 1
   anim: {fileID: 0}
@@ -451,15 +451,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16a72dba0350a884ea9cdc06f0ef31e9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16a72dba0350a884ea9cdc06f0ef31e9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16a72dba0350a884ea9cdc06f0ef31e9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 16a72dba0350a884ea9cdc06f0ef31e9, type: 3}
       propertyPath: m_Name
