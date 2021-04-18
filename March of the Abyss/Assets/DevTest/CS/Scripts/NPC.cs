@@ -194,7 +194,7 @@ public class NPC : MonoBehaviour
         {
             targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
             str = Mathf.Min(turnRate * Time.deltaTime, 1);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0); //Change last value back to str ------------=-=-=-=-=-=--00-0=9
 
             if (isMelee)
             {
@@ -211,7 +211,7 @@ public class NPC : MonoBehaviour
 
                 targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
                 str = Mathf.Min(turnRate * Time.deltaTime, 1);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+                transform.rotation = Quaternion.Lerp(transform.rotation * new Quaternion(1,0,1, 1), targetRotation, str);
 
                 if (Time.time > lastWait)
                 {
@@ -264,6 +264,7 @@ public class NPC : MonoBehaviour
 
         if (target != null)
         {
+            Debug.Log("Sending Damage To player or minion");
             target.SendMessage("Damage", 5, SendMessageOptions.DontRequireReceiver);
             target.SendMessage("MinionDamage", 5, SendMessageOptions.DontRequireReceiver);
         }
@@ -314,7 +315,10 @@ public class NPC : MonoBehaviour
     {
 
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position, attackRange * 1.5f, transform.forward, out hit, targetMask))
+        
+
+
+        if (Physics.SphereCast(transform.position, attackRange * 1.5f, transform.forward, out hit, targetMask))
         {
             rayHitDist = hit.distance;
             if(hit.transform.gameObject.layer == 9 || hit.transform.gameObject.layer == 13)
@@ -332,6 +336,10 @@ public class NPC : MonoBehaviour
                 currentState = NPCState.ATTACK;
             }
         }
+
+
+
+
     }
     #region Patrol
 
