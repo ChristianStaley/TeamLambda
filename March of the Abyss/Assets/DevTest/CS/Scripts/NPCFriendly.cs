@@ -65,6 +65,11 @@ public class NPCFriendly : NPC
             StartSearch();
         }
 
+        if(target == null)
+        {
+            target = player;
+        }
+
         
     }
 
@@ -80,7 +85,7 @@ public class NPCFriendly : NPC
     {
 
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, attackRange, transform.forward, out hit))
+        if (Physics.SphereCast(transform.position, attackRange * 1.5f, transform.forward, out hit))
         {
             if (hit.transform.gameObject.layer == 10)
             {
@@ -93,7 +98,7 @@ public class NPCFriendly : NPC
                 target = player;
             }
         }
-        else if (Physics.SphereCast(transform.position, attackRange/2, -transform.forward, out hit))
+        else if (Physics.SphereCast(transform.position, attackRange, -transform.forward, out hit))
         {
             if (hit.transform.gameObject.layer == 10)
             {
@@ -106,23 +111,21 @@ public class NPCFriendly : NPC
                 target = player;
             }
         }
-        //else if(Vector3.Distance(transform.position, player.transform.position) > maxDistance)
-        //{
-        //        currentState = NPCState.MOVING;
-        //        target = player;
-        //}
 
-        //foundTarget = false;
 
     }
 
-    
 
     public void MinionDamage(int damage)
     {
-        //currentHealth -= damage;
+
+        Debug.Log("MINIONDAMAGE");
+
+        npcHealth.fl_HP -= damage;
         currentState = NPCState.ATTACK;
         StartSearch();
     }
+
+
 
 }
