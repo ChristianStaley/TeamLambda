@@ -23,7 +23,7 @@ public class NPCHostile : NPC
     protected override void Update()
     {
         base.Update();
-
+        
     }
 
     protected override void TargetDistance()

@@ -50,7 +50,6 @@ public class NPC : MonoBehaviour
         agent.speed = moveSpeed;
         agent.angularSpeed = 250;
         agent.acceleration = 100;
-        rb.constraints = RigidbodyConstraints.FreezeRotationY;
         if (player == null)
         {
             player = GameObject.Find("Player");
@@ -71,6 +70,7 @@ public class NPC : MonoBehaviour
         TargetDistance();
 
 
+        
         switch (currentState)
         {
             case NPCState.IDLE:
@@ -102,7 +102,6 @@ public class NPC : MonoBehaviour
 
             case NPCState.ATTACK:
                 {
-                    
                     AttackTarget();
                     return;
                 }
@@ -115,6 +114,7 @@ public class NPC : MonoBehaviour
     {
         if (target != null)
         {
+            
             currentDistance = Vector3.Distance(transform.position, target.transform.position);
             if (currentDistance <= maxDistance && currentDistance > attackRange) //&& currentDistance <= minDistance)
             {
@@ -126,7 +126,10 @@ public class NPC : MonoBehaviour
             }
             else if (currentDistance <= attackRange)
             {
-                
+                targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                str = Mathf.Min(100 * Time.deltaTime, 1);
+                rb.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+                transform.rotation = new Quaternion(0, rb.rotation.y, 0, transform.rotation.w);
                 currentState = NPCState.ATTACK;
             }
 
@@ -146,7 +149,7 @@ public class NPC : MonoBehaviour
         }
 
 
-
+        
 
     }
 
@@ -158,7 +161,8 @@ public class NPC : MonoBehaviour
 
     public virtual void MoveToPoint()
     {
-        if(target != null)
+
+        if (target != null)
         {
             anim.SetFloat("Speed", 1,0.1f, Time.deltaTime);
             agent.destination = target.transform.position;
@@ -192,9 +196,13 @@ public class NPC : MonoBehaviour
     {
         if (target != null)
         {
-            targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            str = Mathf.Min(turnRate * Time.deltaTime, 1);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0); //Change last value back to str ------------=-=-=-=-=-=--00-0=9
+            //targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            //str = Mathf.Min(turnRate * Time.deltaTime, 1);
+            //rb.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str); //Change last value back to str ------------=-=-=-=-=-=--00-0=9
+            //rb.MoveRotation(Quaternion.Lerp(transform.rotation, targetRotation, str));
+            //rb.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+
+            
 
             if (isMelee)
             {
@@ -209,16 +217,9 @@ public class NPC : MonoBehaviour
             else if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
             {
 
-                targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-                str = Mathf.Min(turnRate * Time.deltaTime, 1);
-                transform.rotation = Quaternion.Lerp(transform.rotation * new Quaternion(1,0,1, 1), targetRotation, str);
 
                 if (Time.time > lastWait)
                 {
-
-                    targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-                    str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
 
                     anim.SetBool("Attack", true);
                     GameObject tempProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
@@ -228,9 +229,6 @@ public class NPC : MonoBehaviour
                 }
                 else
                 {
-                    targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-                    str = Mathf.Min((turnRate * 2) * Time.deltaTime, 1);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
                     anim.SetBool("Attack", false);
                 }
 
@@ -248,7 +246,7 @@ public class NPC : MonoBehaviour
             
             StartSearch();
         }
-        
+
         
         
     }
@@ -259,6 +257,7 @@ public class NPC : MonoBehaviour
     {
         anim.SetBool("isAttack", true);
         performMeleeAttack = false;
+
 
         yield return new WaitForSeconds(1f);
 
