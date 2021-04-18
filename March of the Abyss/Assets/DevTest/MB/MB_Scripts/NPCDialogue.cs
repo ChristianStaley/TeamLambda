@@ -58,7 +58,7 @@ public class NPCDialogue : MonoBehaviour
         else if (go_PC && Vector3.Distance(go_PC.transform.position, transform.position) < fl_distance + 1)
         {
             go_panel.SetActive(false);
-            
+
         }
 
     }

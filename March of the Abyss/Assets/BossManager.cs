@@ -10,6 +10,8 @@ public class BossManager : MonoBehaviour
     public GameObject Phase2End;
 
 
+    public Animator animBoss;
+
     private HealthBarController healthbar;
     //public bool tickOn;
 
@@ -296,12 +298,14 @@ public class BossManager : MonoBehaviour
                 {
                     go_panel.SetActive(false);
                     speechFinish = true;
+                    animBoss.SetTrigger("CombatIdle");
                 }
 
             }
 
             // update the text box
             txt_window.text = st_message[in_message_stage];
+            //animBoss.SetTrigger("CombatIdle");
             //txt_NPC.text = NPC_name;
         }
     }

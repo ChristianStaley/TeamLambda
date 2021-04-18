@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     public float maxDistance;
     public float minDistance;
 
+
     protected Animator anim;
     
 
@@ -20,6 +21,8 @@ public class NPC : MonoBehaviour
     [SerializeField]
     protected GameObject deadBody;
 
+
+    public NPCHealth npcHealth;
     public enum NPCState 
     {
         IDLE,
@@ -41,7 +44,7 @@ public class NPC : MonoBehaviour
     protected virtual void Start()
     {
         cc_NPC = GetComponent<CharacterController>();
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         agent.speed = moveSpeed;
@@ -276,14 +279,14 @@ public class NPC : MonoBehaviour
 
     #region Health
 
-    [SerializeField]
-    protected float maxHealth = 100;
-    protected float currentHealth;
+    //[SerializeField]
+    //protected float maxHealth = 100;
+    //protected float currentHealth;
 
 
     protected virtual void CheckHealth()
     {
-        if(currentHealth <= 0)
+        if(npcHealth.fl_HP <= 0)
         {
             DoKill();
         }
@@ -303,10 +306,10 @@ public class NPC : MonoBehaviour
         this.enabled = false;
     }
 
-    protected virtual float GetHealth()
-    {
-        return currentHealth;
-    }
+    //protected virtual float GetHealth()
+    //{
+    //    return currentHealth;
+    //}
 
 
     #endregion

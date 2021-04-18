@@ -10,10 +10,12 @@ public class BossAttack : MonoBehaviour
     public float fl_cool_down = 1;
     private float fl_next_shot_time;
     public BossManager bossManager;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         // if no target is set find the first tagged as the enemy
         if (!go_target) go_target = GameObject.FindWithTag("Player");
     }//-----
@@ -37,11 +39,14 @@ public class BossAttack : MonoBehaviour
             transform.LookAt(go_target.transform.position);
 
             // Spawn an arrow     
-            Instantiate(go_projectile, transform.position + transform.TransformDirection(new Vector3(0, 0, 3F)), transform.rotation);
+            Instantiate(go_projectile, transform.position + transform.TransformDirection(new Vector3(0, 0, 2F)), transform.rotation);
+            anim.SetTrigger("Attack");
+            
 
             //Reset Cooldown
             fl_next_shot_time = Time.time + fl_cool_down;
         }
+        //anim.SetBool("Attack1", false);
     }//------ 
 
 }//========
