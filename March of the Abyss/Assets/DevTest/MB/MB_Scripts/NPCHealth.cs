@@ -11,6 +11,7 @@ public class NPCHealth : MonoBehaviour
     public float fl_max_HP = 100;
     private Transform tx_HP_bar;
     public GameObject go_hit_text;
+    public bool isMinion;
 
     public Animator anim;
 
@@ -26,6 +27,12 @@ public class NPCHealth : MonoBehaviour
     void Update()
     {
         CheckHealth();
+
+        if(fl_HP < 0)
+        {
+            fl_HP = 0;
+        }
+
         ResizeBar();
         if (fl_HP <= 0)
         {
@@ -47,7 +54,7 @@ public class NPCHealth : MonoBehaviour
     // ----------------------------------------------------------------------
     void ResizeBar()
     {   // is there am HP bar attached
-        if (tx_HP_bar != null && tx_HP_bar)
+        if (fl_HP > 0 && tx_HP_bar != null && tx_HP_bar)
         {   // Resize and colour the bar based on current HP
             tx_HP_bar.localScale = new Vector3((fl_HP / fl_max_HP), 0.1F, 0.1F);
             if (fl_HP > fl_max_HP / 2) tx_HP_bar.GetComponent<Renderer>().material.color = Color.green;
@@ -63,7 +70,7 @@ public class NPCHealth : MonoBehaviour
     public void Damage(float _fl_damage)
     {
         // Subtract the damage sent from HP
-        if (!invincible)
+        if (!invincible && !isMinion)
         {
             fl_HP -= _fl_damage;
             StartCoroutine(DamageDelay());
@@ -82,6 +89,22 @@ public class NPCHealth : MonoBehaviour
 
 
     }//-----
+
+    public void MinionDamge(float damage)
+    {
+        if (isMinion)
+        {
+            fl_HP -= damage;
+            StartCoroutine(DamageDelay());
+            GameObject _GO_hit_text = Instantiate(go_hit_text, transform.position, Quaternion.identity, transform) as GameObject;
+            Vector3 dmgPos = Camera.main.WorldToScreenPoint(transform.position);
+            go_hit_text.transform.position = dmgPos;
+
+            // Create text mesh to show hit damage
+            _GO_hit_text.GetComponent<TextMeshPro>().text = damage.ToString();
+            _GO_hit_text.GetComponent<TextMeshPro>().color = Color.red;
+        }
+    }
     
 
     IEnumerator DamageDelay()

@@ -11,6 +11,7 @@ public class Projectile : BaseProjectile
     public float constantAttackCooldown = 0.1f;
     private float lastTime;
     public float duration = 1.5f;
+    public bool damageMinion;
 
     private Collider cl;
 
@@ -63,6 +64,11 @@ public class Projectile : BaseProjectile
         if (!constantDamage)
         {
             other.collider.gameObject.SendMessage("Damage", fl_damage, SendMessageOptions.DontRequireReceiver);
+
+            if (damageMinion)
+            {
+                other.collider.gameObject.SendMessage("MinionDamage", fl_damage, SendMessageOptions.DontRequireReceiver);
+            }
             Destroy(this.gameObject);
         }
 

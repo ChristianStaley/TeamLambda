@@ -143,6 +143,7 @@ MonoBehaviour:
   minDistance: 5
   ignorePlayer: 0
   deadBody: {fileID: 0}
+  npcHealth: {fileID: 0}
   currentState: 0
   searchTime: 100
   moveSpeed: 8
@@ -153,7 +154,6 @@ MonoBehaviour:
   projectile: {fileID: 2089706992297949151, guid: 4f870b34d4a195441900dc695ec8c003, type: 3}
   turnRate: 0
   isMelee: 0
-  maxHealth: 25
   gos_waypoints: []
   fl_speed: 3
 --- !u!114 &-7159060592313294444
@@ -171,6 +171,7 @@ MonoBehaviour:
   fl_HP: 25
   fl_max_HP: 25
   go_hit_text: {fileID: 3422733249172635069, guid: 0fab0d53687a2c5408bb56f36ddb8814, type: 3}
+  isMinion: 1
   anim: {fileID: 0}
 --- !u!95 &5651938925574350838
 Animator:
