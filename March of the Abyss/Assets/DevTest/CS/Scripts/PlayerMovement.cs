@@ -64,25 +64,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public GameObject spellUnlocked;
+    public GameObject Spell2Lock;
     public GameObject spell2Unlocked;
+    public GameObject spell3Lock;
     void Update()
     {
 
-        if(GM.KillCount == 5)
-        {
-            GM.Gold += 10;
-        }
+ 
         
         if(GM.KillCount >= 10 && spellUnlocked != null)
         {
             GM.Spell2Active = true;
             spellUnlocked.SetActive(true);
+            Spell2Lock.SetActive(false);
+            //GM.Gold += 10;
             Destroy(spellUnlocked, 5f);
-        }
-
-        if (GM.KillCount == 15)
-        {
-            GM.Gold += 25;
         }
 
 
@@ -90,13 +86,12 @@ public class PlayerMovement : MonoBehaviour
         {
             GM.Spell3Active = true;
             spell2Unlocked.SetActive(true);
+            spell3Lock.SetActive(false);
+            //GM.Gold += 100;
             Destroy(spell2Unlocked, 5f);
         }
 
-        if (GM.KillCount == 50)
-        {
-            GM.Gold += 100;
-        }
+ 
 
         if (GM.Health > 0)
         {
@@ -308,7 +303,7 @@ public class PlayerMovement : MonoBehaviour
             rangeCooldown = true;
             agent.isStopped = false;
             animator.SetBool("Attack1", false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.4f);
             
             rangeCooldown = false;
             

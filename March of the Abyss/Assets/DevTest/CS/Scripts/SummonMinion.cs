@@ -21,9 +21,9 @@ public class SummonMinion : MonoBehaviour
     void Update()
     {
 
-        if (Vector3.Distance(player.transform.position, transform.position) <= detectDistance && Input.GetKeyDown(KeyCode.R) && GM.Souls >=100)
+        if (Vector3.Distance(player.transform.position, transform.position) <= detectDistance && Input.GetKeyDown(KeyCode.R) && GM.Souls >=50)
         {
-            GM.Souls = -75;
+            GM.Souls = -50;
             GameObject.Instantiate(minion, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             Destroy(this.gameObject, 1f);
             this.enabled = false;
