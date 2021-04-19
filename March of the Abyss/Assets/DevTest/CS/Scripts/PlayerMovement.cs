@@ -308,7 +308,7 @@ public class PlayerMovement : MonoBehaviour
             rangeCooldown = true;
             agent.isStopped = false;
             animator.SetBool("Attack1", false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.4f);
             
             rangeCooldown = false;
             
