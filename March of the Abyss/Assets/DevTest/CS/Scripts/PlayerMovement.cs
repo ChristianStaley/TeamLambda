@@ -38,7 +38,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Abilities abilitiesUI;
 
-
+    public GameObject spellUnlocked;
+    public GameObject Spell2Lock;
+    public GameObject spell2Unlocked;
+    public GameObject spell3Lock;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -46,8 +49,12 @@ public class PlayerMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         
-        abilitiesUI = Spell1UI.GetComponent<Abilities>();
-
+        if(Spell1UI != null)
+        {
+            abilitiesUI = Spell1UI.GetComponent<Abilities>();
+        }
+        
+        
         
 
     }
@@ -66,10 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public GameObject spellUnlocked;
-    public GameObject Spell2Lock;
-    public GameObject spell2Unlocked;
-    public GameObject spell3Lock;
+    
     void Update()
     {
 
@@ -90,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             Spell2Lock.SetActive(false);
             //GM.Gold += 10;
             Destroy(spellUnlocked, 5f);
+            spellUnlocked = null;
         }
 
 
@@ -100,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
             spell3Lock.SetActive(false);
             //GM.Gold += 100;
             Destroy(spell2Unlocked, 5f);
+            spell2Unlocked = null;
         }
 
  
