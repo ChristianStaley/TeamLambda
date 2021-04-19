@@ -36,6 +36,14 @@ public class GM : MonoBehaviour
     #endregion
 
 
+    public GameObject playerStats;
+    public static GameObject PlayerStatsGM
+    {
+        get
+        {
+            return mSingleton.playerStats;
+        }
+    }
 
     private void Start()
     {

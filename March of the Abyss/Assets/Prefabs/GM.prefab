@@ -7141,12 +7141,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnablePrefabs: []
   currentSpawnLocation: {x: 0, y: 0, z: 0}
+  currentSouls: 0
   spellList:
   - {fileID: 1294203603030675031, guid: 7067a7265eb65714884c64639614bbf8, type: 3}
   - {fileID: 113304851727749331, guid: e58bb191e28d81749a1fc217063cd56e, type: 3}
   - {fileID: 9093042612015152753, guid: f7106615f2398d34a86dd7ed1e817735, type: 3}
   currentHealth: 100
+  currentAttackSpeed: 0
+  currentAttackRange: 0
+  currentAttackDamage: 0
   currentMana: 100
+  currentGold: 0
 --- !u!114 &3128200484892900431
 MonoBehaviour:
   m_ObjectHideFlags: 0

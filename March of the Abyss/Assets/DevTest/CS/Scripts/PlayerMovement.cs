@@ -45,7 +45,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+        
         abilitiesUI = Spell1UI.GetComponent<Abilities>();
+
+        
 
     }
     
@@ -70,9 +73,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
- 
-        
-        if(GM.KillCount >= 10 && spellUnlocked != null)
+        if (Spell1UI == null)
+        {
+            Spell1UI = GM.PlayerStatsGM;
+        }
+
+        if(abilitiesUI == null)
+        {
+            abilitiesUI = Spell1UI.GetComponent<Abilities>();
+        }
+
+        if (GM.KillCount >= 10 && spellUnlocked != null)
         {
             GM.Spell2Active = true;
             spellUnlocked.SetActive(true);
