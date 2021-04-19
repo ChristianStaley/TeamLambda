@@ -13,7 +13,7 @@ public class NPC : MonoBehaviour
 
 
     protected Animator anim;
-    
+
 
     [SerializeField]
     protected bool ignorePlayer = false;
@@ -327,6 +327,7 @@ public class NPC : MonoBehaviour
             {
                 target = hit.transform.gameObject;
                 currentState = NPCState.ATTACK;
+
             }
         }
         if(Physics.SphereCast(transform.position, attackRange, -transform.forward, out hit, targetMask))
@@ -336,6 +337,7 @@ public class NPC : MonoBehaviour
             {
                 target = hit.transform.gameObject;
                 currentState = NPCState.ATTACK;
+
             }
         }
 
