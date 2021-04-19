@@ -284,7 +284,9 @@ MonoBehaviour:
   pauseMenuPanel: {fileID: 0}
   Spell1UI: {fileID: 0}
   spellUnlocked: {fileID: 0}
+  Spell2Lock: {fileID: 0}
   spell2Unlocked: {fileID: 0}
+  spell3Lock: {fileID: 0}
   castPoint: {fileID: 1024384028593462313}
 --- !u!114 &5812354633572709372
 MonoBehaviour:
@@ -298,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb3386f101ef1d409034a49417c19c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healCost: 60
+  healCost: 40
   healAmount: 20
 --- !u!95 &4865742791191944502
 Animator:
