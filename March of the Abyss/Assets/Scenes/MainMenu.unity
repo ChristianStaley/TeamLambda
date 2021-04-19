@@ -2436,10 +2436,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Left click to move character around the world. Hold to continously move.
+  m_text: 'Right click to move character around the world. Hold to continously move.
 
 
-    Right
+    Left
     click to melee attack enemies.
 
 
@@ -2447,15 +2447,15 @@ MonoBehaviour:
     (If you have enough souls).
 
 
-    Press 1,2 and 3 for spell attacks.
+    Press 1,2 and 3 for spell attacks. Spells 2
+    and 3 unlock as you progress through the game.
 
 
-    Some
-    spells require you to aim them and press right click to release.
+    Press H to spend souls to
+    heal.
 
 
-    Spells
-    2 and 3 are unlocked through kill quests.'
+    Some spells require you to aim them and press left click to fire.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6eddcae35aeca694e83769a29fd0b22b, type: 2}
   m_sharedMaterial: {fileID: -793290804954461905, guid: 6eddcae35aeca694e83769a29fd0b22b, type: 2}

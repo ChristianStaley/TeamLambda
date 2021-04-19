@@ -4830,12 +4830,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fl_range: 5
   fl_speed: 0.001
-  fl_damage: 3
+  fl_damage: 5
   bl_use_Trigger: 1
   preview: {fileID: 8663945752511305404, guid: a0967e15e427e7b4f92abaccc8ce4266, type: 3}
   constantDamage: 1
   constantAttackCooldown: 0.1
   duration: 1.5
+  damageMinion: 0
 --- !u!54 &338570143855141850
 Rigidbody:
   m_ObjectHideFlags: 0

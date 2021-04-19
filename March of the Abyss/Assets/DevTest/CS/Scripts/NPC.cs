@@ -62,6 +62,7 @@ public class NPC : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    float timeCount;
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -102,6 +103,15 @@ public class NPC : MonoBehaviour
 
             case NPCState.ATTACK:
                 {
+                    if(target != null)
+                    {
+                        targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                        str = Mathf.Min(1000 * Time.deltaTime, 1);
+                        rb.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+                        transform.rotation = new Quaternion(0, rb.rotation.y, 0, transform.rotation.w);
+                       
+                    }
+                        
                     AttackTarget();
                     return;
                 }
@@ -126,10 +136,7 @@ public class NPC : MonoBehaviour
             }
             else if (currentDistance <= attackRange)
             {
-                targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-                str = Mathf.Min(100 * Time.deltaTime, 1);
-                rb.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
-                transform.rotation = new Quaternion(0, rb.rotation.y, 0, transform.rotation.w);
+                
                 currentState = NPCState.ATTACK;
             }
 
@@ -227,10 +234,7 @@ public class NPC : MonoBehaviour
                     lastWait = Time.time + attackCooldown;
                     
                 }
-                else
-                {
-                    anim.SetBool("Attack", false);
-                }
+
 
             }
             else if (Vector3.Distance(target.transform.position, transform.position) > attackRange)
@@ -257,7 +261,6 @@ public class NPC : MonoBehaviour
     {
         anim.SetBool("isAttack", true);
         performMeleeAttack = false;
-
 
         yield return new WaitForSeconds(1f);
 
