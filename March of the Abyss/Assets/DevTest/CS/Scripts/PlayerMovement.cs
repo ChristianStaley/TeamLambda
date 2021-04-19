@@ -413,6 +413,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     target = null;
                     animator.SetBool("isAttack", false);
+                    animator.SetBool("MeleeAttack", false);
                 }
 
                 
@@ -422,6 +423,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("isAttack", false);
+            animator.SetBool("MeleeAttack", false);
         }
 
         animator.SetFloat("Speed", agent.desiredVelocity.magnitude, 0.1f, Time.deltaTime);
@@ -430,6 +432,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator MeleeAttackInterval()
     {
         animator.SetBool("isAttack", true);
+        animator.SetBool("MeleeAttack", true);
         performMeleeAttack = false;
         
         
@@ -444,6 +447,7 @@ public class PlayerMovement : MonoBehaviour
         if (target == null)
         {
             animator.SetBool("isAttack", false);
+            animator.SetBool("MeleeAttack", false);
             performMeleeAttack = true;
         }
     }
