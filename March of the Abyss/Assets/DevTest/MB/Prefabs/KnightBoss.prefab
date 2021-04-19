@@ -427,8 +427,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  maxDistance: 10
-  minDistance: 3
+  maxDistance: 15
+  minDistance: 2
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
   npcHealth: {fileID: 1638149686134215834}
@@ -461,6 +461,7 @@ MonoBehaviour:
   fl_HP: 100
   fl_max_HP: 100
   go_hit_text: {fileID: 3422733249172635069, guid: 0fab0d53687a2c5408bb56f36ddb8814, type: 3}
+  isMinion: 0
   anim: {fileID: 0}
 --- !u!95 &5695952544772602025
 Animator:
