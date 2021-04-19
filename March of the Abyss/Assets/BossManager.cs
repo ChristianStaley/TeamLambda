@@ -351,9 +351,10 @@ public class BossManager : MonoBehaviour
                     go_panel.SetActive(false);
                     animBoss.SetBool("lDead",true);
                     SceneManager.LoadScene("Ending");
+                        SceneManager.LoadScene(4);
                         //GAME OVER SCENE
-                   
-                }
+
+                    }
 
             }
 
