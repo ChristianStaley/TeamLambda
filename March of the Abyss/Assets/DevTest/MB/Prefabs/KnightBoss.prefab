@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  maxDistance: 15
+  maxDistance: 10
   minDistance: 2
   ignorePlayer: 0
   deadBody: {fileID: 1886265066210937435, guid: 1dfac3844db5ca9499ff6297fbc79d58, type: 3}
@@ -435,7 +435,7 @@ MonoBehaviour:
   currentState: 0
   searchTime: 100
   moveSpeed: 6
-  attackRange: 3
+  attackRange: 5
   targetMask:
     serializedVersion: 2
     m_Bits: 0
