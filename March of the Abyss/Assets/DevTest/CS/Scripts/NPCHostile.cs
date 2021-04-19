@@ -23,7 +23,7 @@ public class NPCHostile : NPC
     protected override void Update()
     {
         base.Update();
-
+        
     }
 
     protected override void TargetDistance()
@@ -46,7 +46,6 @@ public class NPCHostile : NPC
         if (!invicible)
         {
             
-            //currentHealth -= damage;
             StartCoroutine(DamageDelay());
             
         }

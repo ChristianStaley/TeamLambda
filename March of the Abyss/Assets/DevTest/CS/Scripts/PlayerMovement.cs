@@ -56,7 +56,8 @@ public class PlayerMovement : MonoBehaviour
         agent.ResetPath();
 
         agent.Warp(GM.SpawnLocation);
-
+        GM.Gold /= 2;
+        GM.Souls /= 2;
         yield return new WaitForSeconds(0.1f);
         agent.enabled = true;
 
@@ -67,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        if(GM.KillCount == 5)
+        {
+            GM.Gold += 10;
+        }
+        
         if(GM.KillCount >= 10 && spellUnlocked != null)
         {
             GM.Spell2Active = true;
@@ -74,11 +80,22 @@ public class PlayerMovement : MonoBehaviour
             Destroy(spellUnlocked, 5f);
         }
 
-        if(GM.KillCount >= 25 && spell2Unlocked != null)
+        if (GM.KillCount == 15)
+        {
+            GM.Gold += 25;
+        }
+
+
+        if (GM.KillCount >= 25 && spell2Unlocked != null)
         {
             GM.Spell3Active = true;
             spell2Unlocked.SetActive(true);
             Destroy(spell2Unlocked, 5f);
+        }
+
+        if (GM.KillCount == 50)
+        {
+            GM.Gold += 100;
         }
 
         if (GM.Health > 0)
@@ -134,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))// && Vector3.Distance(gameObject.transform.position, tempPreview.transform.position) <= GM.spell.GetComponent<Projectile>().fl_range)
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10000, 9))// && Vector3.Distance(gameObject.transform.position, tempPreview.transform.position) <= GM.spell.GetComponent<Projectile>().fl_range)
             {
                 tempPreview.transform.position = Vector3.MoveTowards(tempPreview.transform.position, hit.point, 2f);
             }
@@ -302,19 +319,21 @@ public class PlayerMovement : MonoBehaviour
 
 
         private void SetMovePosition()
-    {
+        {
         RaycastHit hit;
 
         
         if (Input.GetMouseButtonDown(1) && !GM.UIActive) //Changed
         {
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10000))
             {
 
             }
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+            target = null;
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10000, 9))
             {
                 if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Hostile"))
                 {
@@ -332,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetMouseButton(1) && !GM.UIActive) //changed
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 9))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10000, 9))
             {
                 if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
                 {
@@ -350,7 +369,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !previewEnabled && !GM.UIActive) //Changed
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Hostile"))
                 {
@@ -417,6 +436,7 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("isAttack", true);
         performMeleeAttack = false;
+        
         
         yield return new WaitForSeconds(GM.AttackSpeed);
 
