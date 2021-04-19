@@ -29,6 +29,7 @@ public class GM : MonoBehaviour
         {
             Destroy(gameObject);
         }
+       
     }
 
 
