@@ -9,19 +9,19 @@ public class Abilities : MonoBehaviour
     public Image abilityImage1;
     public float cooldown1 = 5;
     bool isCooldown = false;
-    public KeyCode ability1;
+    //public KeyCode ability1;
 
     [Header("Ability 2")]
     public Image abilityImage2;
     public float cooldown2 = 1;
     bool isCooldown2 = false;
-    public KeyCode ability2;
+    //public KeyCode ability2;
 
     [Header("Ability 3")]
     public Image abilityImage3;
     public float cooldown3 = 3;
     bool isCooldown3 = false;
-    public KeyCode ability3;
+    //public KeyCode ability3;
 
     // Start is called before the first frame update
     void Start()

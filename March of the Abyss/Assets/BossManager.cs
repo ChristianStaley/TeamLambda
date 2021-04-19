@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class BossManager : MonoBehaviour
         healthbar = GameObject.Find("BossHP").GetComponent<HealthBarController>();
         txt_window = go_panel.transform.Find("DialogueText").GetComponent<Text>();
         //go_Player = GameObject.Find("Player"); // find the game object with name player
-        Cursor.visible = false; // turn off the current cursor
+        Cursor.visible = true; // turn off the current cursor
 
         if (mSingleton == null)
         {
@@ -48,6 +49,8 @@ public class BossManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        GM.SpawnLocation = new Vector3(-17.62f, 0.37f, -0.3f);
     }
     // Start is called before the first frame update
     void Start()
@@ -347,6 +350,7 @@ public class BossManager : MonoBehaviour
                 {
                     go_panel.SetActive(false);
                     animBoss.SetBool("lDead",true);
+                    SceneManager.LoadScene("Ending");
                         //GAME OVER SCENE
                    
                 }
