@@ -41,7 +41,7 @@ public class NPCHealth : MonoBehaviour
                 anim.SetBool("Dead", true);
             }
                 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }//-----
 
